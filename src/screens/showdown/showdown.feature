@@ -1,4 +1,4 @@
-Feature: App
+Feature: Showdown
 
   Scenario: Data is loaded
     Given data is "loaded"

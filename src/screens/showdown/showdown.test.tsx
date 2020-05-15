@@ -3,9 +3,9 @@ import {defineFeature, DefineStepFunction, loadFeature} from 'jest-cucumber';
 import React from 'react';
 import 'react-native';
 import {RenderAPI} from 'react-native-testing-library';
-import HomeScreen from './home';
+import ShowdownScreen from './showdown';
 
-const feature = loadFeature('./home.feature', loadFeatureOptions);
+const feature = loadFeature('./showdown.feature', loadFeatureOptions);
 
 defineFeature(feature, test => {
   let component: RenderAPI;
@@ -13,8 +13,8 @@ defineFeature(feature, test => {
   beforeEach(() => {});
 
   const iAmAtScreen = (step: DefineStepFunction) => {
-    step('I am at "Home Screen"', () => {
-      component = render(<HomeScreen.Component />);
+    step('I am at "Showdown Screen"', () => {
+      component = render(<ShowdownScreen.Component />);
     });
   };
 

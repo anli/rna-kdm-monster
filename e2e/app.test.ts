@@ -19,7 +19,7 @@ defineFeature(feature, test => {
   test('Data is loaded', ({given, when, then}) => {
     given('data is "loaded"', () => {});
 
-    when('I am at "Home Screen"', () => {});
+    when('I am at "Showdown Screen"', () => {});
 
     iShouldSeeText(then);
   });
