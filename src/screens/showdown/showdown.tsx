@@ -1,6 +1,7 @@
 import React from 'react';
+import {ScrollView} from 'react-native';
 import styled from 'styled-components/native';
-import {Cards, Header, Screen, Stats} from './components';
+import {CardImage, Cards, Header, Screen, Stats} from './components';
 import useShowdown from './hooks';
 
 const ShowdownScreenComponent = () => {
@@ -9,6 +10,12 @@ const ShowdownScreenComponent = () => {
   return (
     <Screen testID="ShowdownScreen">
       <Top>
+        <ScrollView>
+          <CardImage
+            testID={`CARD_IMAGE.${data?.selected?.cardId}`}
+            imageUrl={data?.selected?.imageUrl}
+          />
+        </ScrollView>
         <StatsContainer>
           <Stats
             data={data?.stats}

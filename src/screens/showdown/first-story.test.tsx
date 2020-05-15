@@ -2,6 +2,7 @@ import {loadFeatureOptions, render} from '@test';
 import {defineFeature, DefineStepFunction, loadFeature} from 'jest-cucumber';
 import React from 'react';
 import 'react-native';
+import FastImage from 'react-native-fast-image';
 import {fireEvent, RenderAPI} from 'react-native-testing-library';
 import ShowdownScreen from './showdown';
 
@@ -9,6 +10,7 @@ const feature = loadFeature('./first-story.feature', loadFeatureOptions);
 
 defineFeature(feature, test => {
   let component: RenderAPI;
+  jest.spyOn(FastImage, 'preload').mockImplementation(() => {});
 
   beforeEach(() => {});
 
@@ -84,6 +86,10 @@ defineFeature(feature, test => {
       ).toBe(true);
     });
 
-    then('I should see selected image "Basic Action"', () => {});
+    then('I should see selected image "Basic Action"', () => {
+      expect(
+        component.getByTestId('CARD_IMAGE.WHITE_LION_BASIC_ACTION'),
+      ).toBeDefined();
+    });
   });
 });

@@ -1,14 +1,20 @@
-import {Encounter} from './types';
+import R from 'ramda';
+import FastImage from 'react-native-fast-image';
+import {Card, Encounter} from './types';
 
 const getData = (encounterId: string) => {
-  return ENCOUNTER[encounterId];
+  const encounter = ENCOUNTER[encounterId];
+  const cards = [...encounter.basicActives];
+  FastImage.preload(getImageUris(cards));
+
+  return encounter;
 };
 
 export default class ShowdownService {
   static getData = getData;
 }
 
-const CARD = {
+export const CARD: {[key: string]: Card} = {
   WHITE_LION_MONSTER: {
     id: 'WHITE_LION_MONSTER',
     imageUrl: 'https://imgur.com/6voXSGA.png',
@@ -38,3 +44,7 @@ const ENCOUNTER: {[key: string]: Encounter} = {
     basicActives: [CARD.WHITE_LION_MONSTER, CARD.WHITE_LION_BASIC_ACTION],
   },
 };
+
+const getImageUris = R.map(({imageUrl}: {imageUrl: string}) => ({
+  uri: imageUrl,
+}));

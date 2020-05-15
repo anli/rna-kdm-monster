@@ -1,3 +1,4 @@
+import {CARD} from './service';
 import {ShowdownState} from './types';
 
 type State = {showdown: ShowdownState};
@@ -13,9 +14,12 @@ const actives = (state: State) => {
 };
 
 const selected = (state: State) => {
+  const cardId = state.showdown.selectedCardId;
+  const imageUrl = cardId ? CARD[cardId].imageUrl : undefined;
   return {
     cardId: state.showdown.selectedCardId,
     deckId: state.showdown.selectedDeckId,
+    imageUrl,
   };
 };
 
