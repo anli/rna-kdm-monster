@@ -59,5 +59,8 @@ defineFeature(feature, test => {
     iLongPressStatButton(when);
     iLongPressStatButton(when);
     iShouldSeeStat(then);
+
+    iShouldSeeText(then);
+    iShouldSeeText(then);
   });
 });

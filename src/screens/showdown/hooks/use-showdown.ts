@@ -17,6 +17,7 @@ const useShowdown = () => {
     monsterName: ShowdownSelectors.monsterName(state),
     encounterName: ShowdownSelectors.encounterName(state),
     stats,
+    actives: ShowdownSelectors.actives(state),
   };
 
   const actions = {

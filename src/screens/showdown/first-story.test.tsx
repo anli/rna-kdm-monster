@@ -51,6 +51,9 @@ defineFeature(feature, test => {
     iShouldSeeStat(then);
     iShouldSeeStat(then);
     iShouldSeeStat(then);
+
+    iShouldSeeText(then);
+    iShouldSeeText(then);
   });
 
   test('Stat is press', ({given, when, then}) => {

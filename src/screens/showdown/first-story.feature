@@ -11,6 +11,9 @@ Feature: First Story
     Then I should see "DMG - Stat"
     Then I should see "ACC - Stat"
 
+    Then I should see "Monster Text"
+    Then I should see "Basic Action Text"
+
   Scenario: Stat is press
     Given data is "First Story"
     When I am at "Showdown Screen"

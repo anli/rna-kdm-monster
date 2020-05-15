@@ -3,6 +3,7 @@ export interface ShowdownState {
   monsterName?: string;
   encounterName?: string;
   stats: Stat[];
+  basicActives: Card[];
 }
 
 export interface Encounter {
@@ -10,10 +11,18 @@ export interface Encounter {
   monsterName: string;
   encounterName: string;
   stats: Stat[];
+  basicActives: Card[];
 }
 
 export interface Stat {
   name: string;
   value: number;
   hasPrefix?: boolean;
+}
+
+export interface Card {
+  id: string;
+  imageUrl: string;
+  name: string;
+  type: string;
 }

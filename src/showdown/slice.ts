@@ -4,6 +4,7 @@ import {ShowdownState, Stat} from './types';
 
 const INITIAL_STATE = {
   stats: [],
+  basicActives: [],
 };
 const showdownSlice = createSlice({
   name: 'Showdown',

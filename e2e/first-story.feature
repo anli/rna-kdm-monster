@@ -19,3 +19,6 @@ Feature: First Story
     When I longPress "ACC Stat Button"
     Then I should see "ACC -1 Stat"
 
+    Then I should see "Monster Text"
+    Then I should see "Basic Action Text"
+
