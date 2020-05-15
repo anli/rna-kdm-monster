@@ -28,9 +28,7 @@ const Tabs = () => {
       barStyle={WHITE_BACKGROUND_STYLE}>
       <Tab.Screen
         options={{
-          tabBarIcon: ({color}) => (
-            <Icon name="showdown" color={color} size={24} />
-          ),
+          tabBarIcon: ({color}) => <Icon name="bug" color={color} size={24} />,
         }}
         name="ShowdownTab"
         component={ShowdownTab}

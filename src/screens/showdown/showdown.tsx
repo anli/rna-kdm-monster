@@ -1,13 +1,14 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Header, Screen} from './components';
+import useShowdown from './hooks';
 
 const ShowdownScreenComponent = () => {
+  const {data} = useShowdown();
+
   return (
-    <>
-      <View>
-        <Text>Showdown</Text>
-      </View>
-    </>
+    <Screen testID="ShowdownScreen">
+      <Header title={data?.monsterName} description={data?.encounterName} />
+    </Screen>
   );
 };
 

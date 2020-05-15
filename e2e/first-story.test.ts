@@ -1,7 +1,7 @@
 import {by, device, element, expect} from 'detox';
 import {defineFeature, DefineStepFunction, loadFeature} from 'jest-cucumber';
 
-const feature = loadFeature('./app.feature', {
+const feature = loadFeature('./first-story.feature', {
   loadRelativePath: true,
 });
 
@@ -21,6 +21,7 @@ defineFeature(feature, test => {
 
     when('I am at "Showdown Screen"', () => {});
 
+    iShouldSeeText(then);
     iShouldSeeText(then);
   });
 });
