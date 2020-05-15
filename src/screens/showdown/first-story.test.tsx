@@ -2,7 +2,7 @@ import {loadFeatureOptions, render} from '@test';
 import {defineFeature, DefineStepFunction, loadFeature} from 'jest-cucumber';
 import React from 'react';
 import 'react-native';
-import {RenderAPI} from 'react-native-testing-library';
+import {fireEvent, RenderAPI} from 'react-native-testing-library';
 import ShowdownScreen from './showdown';
 
 const feature = loadFeature('./first-story.feature', loadFeatureOptions);
@@ -24,6 +24,20 @@ defineFeature(feature, test => {
     });
   };
 
+  const iShouldSeeStat = (step: DefineStepFunction) => {
+    step(/^I should see "(.*) (.*) Stat"$/, (name: string, value: string) => {
+      expect(
+        String(component.queryByTestId(`Stat.${name}`)?.props.children),
+      ).toEqual(value);
+    });
+  };
+
+  const iEventStatButton = (step: DefineStepFunction) => {
+    step(/^I (.*) "(.*) Stat Button"$/, (event: string, name: string) => {
+      fireEvent(component.getByTestId(`Stat.${name}`), event);
+    });
+  };
+
   test('Data is loaded', ({given, when, then}) => {
     given('data is "First Story"', () => {});
 
@@ -31,5 +45,25 @@ defineFeature(feature, test => {
 
     iShouldSeeText(then);
     iShouldSeeText(then);
+
+    iShouldSeeStat(then);
+    iShouldSeeStat(then);
+    iShouldSeeStat(then);
+    iShouldSeeStat(then);
+    iShouldSeeStat(then);
+  });
+
+  test('Stat is press', ({given, when, then}) => {
+    given('data is "First Story"', () => {});
+    iAmAtScreen(when);
+    iEventStatButton(when);
+    iShouldSeeStat(then);
+  });
+
+  test('Stat is long press', ({given, when, then}) => {
+    given('data is "First Story"', () => {});
+    iAmAtScreen(when);
+    iEventStatButton(when);
+    iShouldSeeStat(then);
   });
 });

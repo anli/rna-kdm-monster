@@ -16,12 +16,48 @@ defineFeature(feature, test => {
     });
   };
 
+  const iShouldSeeStat = (step: DefineStepFunction) => {
+    step(
+      /^I should see "(.*) (.*) Stat"$/,
+      async (name: string, value: string) => {
+        await expect(
+          element(by.text(value).withAncestor(by.id(`Stat.${name}`))),
+        ).toBeVisible();
+      },
+    );
+  };
+
+  const iPressStatButton = (step: DefineStepFunction) => {
+    step(/^I press "(.*) Stat Button"$/, async (name: string) => {
+      await element(by.id(`Stat.${name}`)).tap();
+    });
+  };
+
+  const iLongPressStatButton = (step: DefineStepFunction) => {
+    step(/^I longPress "(.*) Stat Button"$/, async (name: string) => {
+      await element(by.id(`Stat.${name}`)).longPress();
+    });
+  };
+
   test('Data is loaded', ({given, when, then}) => {
-    given('data is "loaded"', () => {});
+    given('data is "First Story"', () => {});
 
     when('I am at "Showdown Screen"', () => {});
 
     iShouldSeeText(then);
     iShouldSeeText(then);
+
+    iShouldSeeStat(then);
+    iShouldSeeStat(then);
+    iShouldSeeStat(then);
+    iShouldSeeStat(then);
+    iShouldSeeStat(then);
+
+    iPressStatButton(when);
+    iShouldSeeStat(then);
+
+    iLongPressStatButton(when);
+    iLongPressStatButton(when);
+    iShouldSeeStat(then);
   });
 });
