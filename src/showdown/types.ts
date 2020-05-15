@@ -4,6 +4,8 @@ export interface ShowdownState {
   encounterName?: string;
   stats: Stat[];
   basicActives: Card[];
+  selectedCardId?: string;
+  selectedDeckId?: string;
 }
 
 export interface Encounter {

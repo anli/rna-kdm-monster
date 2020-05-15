@@ -12,9 +12,17 @@ const actives = (state: State) => {
   return [...state.showdown.basicActives];
 };
 
+const selected = (state: State) => {
+  return {
+    cardId: state.showdown.selectedCardId,
+    deckId: state.showdown.selectedDeckId,
+  };
+};
+
 export default class {
   static monsterName = monsterName;
   static encounterName = encounterName;
   static stats = stats;
   static actives = actives;
+  static selected = selected;
 }

@@ -9,13 +9,29 @@ interface Card {
 
 interface Props {
   data?: Card[];
+  onPress: (id: string) => any;
+  selected: {cardId?: string; deckId?: string};
+  deckId: string;
 }
 
-const Cards = ({data}: Props) => (
+const Cards = ({data, onPress: _onPress, selected, deckId}: Props) => (
   <Container horizontal showsHorizontalScrollIndicator={false}>
     {data?.map(card => {
+      const isSelected = getSelected(
+        card.id,
+        deckId,
+        selected.cardId,
+        selected.deckId,
+      );
+
+      const onPress = () => _onPress(card.id);
       return (
-        <Chip key={card.id} mode="outlined">
+        <Chip
+          testID={card.id}
+          key={card.id}
+          mode="outlined"
+          onPress={onPress}
+          selected={isSelected}>
           {card.name}
         </Chip>
       );
@@ -32,3 +48,10 @@ const Chip = styled(UnstyledChip)`
   max-height: 32px;
   min-height: 32px;
 `;
+
+const getSelected = (
+  cardId: string,
+  deckId: string,
+  selectedCardId: string = '',
+  selectedDeckId: string = '',
+) => cardId === selectedCardId && deckId === selectedDeckId;

@@ -69,4 +69,21 @@ defineFeature(feature, test => {
     iEventStatButton(when);
     iShouldSeeStat(then);
   });
+
+  test('Basic active card is press', ({given, when, then}) => {
+    given('data is "First Story"', () => {});
+    iAmAtScreen(when);
+
+    when('I press active card "Basic Action"', () => {
+      fireEvent(component.getByTestId('WHITE_LION_BASIC_ACTION'), 'press');
+    });
+
+    then('I should see selected card "Basic Action"', () => {
+      expect(
+        component.queryByTestId('WHITE_LION_BASIC_ACTION')?.props.selected,
+      ).toBe(true);
+    });
+
+    then('I should see selected image "Basic Action"', () => {});
+  });
 });

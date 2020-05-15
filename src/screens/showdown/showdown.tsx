@@ -20,7 +20,12 @@ const ShowdownScreenComponent = () => {
       <Bottom>
         <Header title={data?.monsterName} description={data?.encounterName} />
         <ActiveCards>
-          <Cards data={data?.actives} />
+          <Cards
+            data={data?.actives}
+            onPress={actions?.onSelectActive}
+            selected={data?.selected}
+            deckId="actives"
+          />
         </ActiveCards>
       </Bottom>
     </Screen>

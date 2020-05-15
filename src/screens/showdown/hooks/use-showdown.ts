@@ -18,11 +18,15 @@ const useShowdown = () => {
     encounterName: ShowdownSelectors.encounterName(state),
     stats,
     actives: ShowdownSelectors.actives(state),
+    selected: ShowdownSelectors.selected(state),
   };
 
   const actions = {
     ...statsActions,
+    onSelectActive: (id: string) =>
+      dispatch(showdownSlice.actions.select({id, deck: 'actives'})),
   };
+
   return {data, actions};
 };
 

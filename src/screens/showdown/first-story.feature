@@ -26,3 +26,10 @@ Feature: First Story
     When I longPress "ACC Stat Button"
     Then I should see "ACC -1 Stat"
 
+  Scenario: Basic active card is press
+    Given data is "First Story"
+    When I am at "Showdown Screen"
+    When I press active card "Basic Action"
+    Then I should see selected card "Basic Action"
+    Then I should see selected image "Basic Action"
+

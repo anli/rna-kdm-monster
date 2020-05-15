@@ -23,6 +23,10 @@ const showdownSlice = createSlice({
     decreaseStat: (state: ShowdownState, action: any) => {
       state.stats = getAdjustedStats(action.payload, false, state.stats);
     },
+    select: (state: ShowdownState, action: any) => {
+      state.selectedCardId = action.payload.id;
+      state.selectedDeckId = action.payload.deck;
+    },
   },
 });
 
