@@ -1,3 +1,4 @@
+import {shuffle} from '@utils';
 import R from 'ramda';
 import FastImage from 'react-native-fast-image';
 import {Card, Encounter} from './types';
@@ -82,6 +83,19 @@ const CARD: {[key: string]: Card} = {
   ...WHITE_LION_AI_CARD,
 };
 
+const getWhiteLionAiCards = () => {
+  const remaindingCards = shuffle([
+    CARD.WHITE_LION_AI_CHOMP,
+    CARD.WHITE_LION_AI_SIZE_UP,
+    CARD.WHITE_LION_AI_POWER_SWAT,
+    CARD.WHITE_LION_AI_GRASP,
+    CARD.WHITE_LION_AI_MAUL,
+    CARD.WHITE_LION_AI_TERRIFYING_ROAR,
+    CARD.WHITE_LION_AI_ENRAGED,
+  ]);
+  return [CARD.WHITE_LION_AI_CLAW, ...remaindingCards];
+};
+
 const ENCOUNTER: {[key: string]: Encounter} = {
   WHITE_LION_FIRST_STORY: {
     id: 'WHITE_LION_FIRST_STORY',
@@ -95,16 +109,7 @@ const ENCOUNTER: {[key: string]: Encounter} = {
       {name: 'ACC', value: 0, hasPrefix: true},
     ],
     basicActives: [CARD.WHITE_LION_MONSTER, CARD.WHITE_LION_BASIC_ACTION],
-    aiCards: [
-      CARD.WHITE_LION_AI_CLAW,
-      CARD.WHITE_LION_AI_CHOMP,
-      CARD.WHITE_LION_AI_SIZE_UP,
-      CARD.WHITE_LION_AI_POWER_SWAT,
-      CARD.WHITE_LION_AI_GRASP,
-      CARD.WHITE_LION_AI_MAUL,
-      CARD.WHITE_LION_AI_TERRIFYING_ROAR,
-      CARD.WHITE_LION_AI_ENRAGED,
-    ],
+    aiCards: getWhiteLionAiCards(),
   },
 };
 
