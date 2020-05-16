@@ -6,6 +6,8 @@ export interface ShowdownState {
   basicActives: Card[];
   selectedCardId?: string;
   selectedDeckId?: string;
+  aiDraws: Card[];
+  aiDiscards: Card[];
 }
 
 export interface Encounter {

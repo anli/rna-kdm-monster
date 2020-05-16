@@ -23,10 +23,18 @@ const selected = (state: State) => {
   };
 };
 
+const ai = (state: State) => {
+  return {
+    draws: state.showdown.aiDraws,
+    discards: state.showdown.aiDiscards,
+  };
+};
+
 export default class {
   static monsterName = monsterName;
   static encounterName = encounterName;
   static stats = stats;
   static actives = actives;
   static selected = selected;
+  static ai = ai;
 }

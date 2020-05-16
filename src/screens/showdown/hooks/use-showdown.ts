@@ -19,12 +19,16 @@ const useShowdown = () => {
     stats,
     actives: ShowdownSelectors.actives(state),
     selected: ShowdownSelectors.selected(state),
+    ai: ShowdownSelectors.ai(state),
   };
 
   const actions = {
     ...statsActions,
     onSelectActive: (id: string) =>
       dispatch(showdownSlice.actions.select({id, deck: 'actives'})),
+    onSelectAi: (id: string) =>
+      dispatch(showdownSlice.actions.select({id, deck: 'ais'})),
+    onDrawAi: () => dispatch(showdownSlice.actions.drawAi()),
   };
 
   return {data, actions};

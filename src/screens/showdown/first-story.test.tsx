@@ -40,6 +40,32 @@ defineFeature(feature, test => {
     });
   };
 
+  const iEventButton = (step: DefineStepFunction) => {
+    step(/^I (.*) "(.*) Button"$/, (event: string, name: string) => {
+      fireEvent(component.getByTestId(`Button.${name}`), event);
+    });
+  };
+
+  const iPressCard = (step: DefineStepFunction) => {
+    step(/^I press "(.*) Card"$/, (name: string) => {
+      fireEvent(component.getByTestId(`Cards.${name}`), 'press');
+    });
+  };
+
+  const iShouldSeeCardSelected = (step: DefineStepFunction) => {
+    step(/^I should see "(.*) Card Selected"$/, (name: string) => {
+      expect(component.queryByTestId(`Cards.${name}`)?.props.selected).toBe(
+        true,
+      );
+    });
+  };
+
+  const iShouldSeeCardImage = (step: DefineStepFunction) => {
+    step(/^I should see "(.*) Card Image"$/, (name: string) => {
+      expect(component.getByTestId(`CardImage.${name}`)).toBeDefined();
+    });
+  };
+
   test('Data is loaded', ({given, when, then}) => {
     given('data is "First Story"', () => {});
 
@@ -55,6 +81,8 @@ defineFeature(feature, test => {
     iShouldSeeStat(then);
 
     iShouldSeeText(then);
+    iShouldSeeText(then);
+
     iShouldSeeText(then);
   });
 
@@ -76,20 +104,20 @@ defineFeature(feature, test => {
     given('data is "First Story"', () => {});
     iAmAtScreen(when);
 
-    when('I press active card "Basic Action"', () => {
-      fireEvent(component.getByTestId('WHITE_LION_BASIC_ACTION'), 'press');
-    });
+    iPressCard(when);
+    iShouldSeeCardSelected(then);
+    iShouldSeeCardImage(then);
+  });
 
-    then('I should see selected card "Basic Action"', () => {
-      expect(
-        component.queryByTestId('WHITE_LION_BASIC_ACTION')?.props.selected,
-      ).toBe(true);
-    });
+  test('Draw AI card', ({given, when, then}) => {
+    given('data is "First Story"', () => {});
+    iAmAtScreen(when);
 
-    then('I should see selected image "Basic Action"', () => {
-      expect(
-        component.getByTestId('CARD_IMAGE.WHITE_LION_BASIC_ACTION'),
-      ).toBeDefined();
-    });
+    iEventButton(when);
+    iShouldSeeText(then);
+
+    iPressCard(when);
+    iShouldSeeCardSelected(then);
+    iShouldSeeCardImage(then);
   });
 });

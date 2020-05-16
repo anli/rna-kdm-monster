@@ -22,3 +22,6 @@ Feature: First Story
     Then I should see "Monster Text"
     Then I should see "Basic Action Text"
 
+    Then I should see "AI (8) Text"
+    When I press "AiDraw Button"
+    Then I should see "Claw Text"

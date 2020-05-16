@@ -12,9 +12,10 @@ interface Props {
   onPress: (id: string) => any;
   selected: {cardId?: string; deckId?: string};
   deckId: string;
+  testID: string;
 }
 
-const Cards = ({data, onPress: _onPress, selected, deckId}: Props) => (
+const Cards = ({data, onPress: _onPress, selected, deckId, testID}: Props) => (
   <Container horizontal showsHorizontalScrollIndicator={false}>
     {data?.map(card => {
       const isSelected = getSelected(
@@ -27,7 +28,7 @@ const Cards = ({data, onPress: _onPress, selected, deckId}: Props) => (
       const onPress = () => _onPress(card.id);
       return (
         <Chip
-          testID={card.id}
+          testID={`${testID}.${card.id}`}
           key={card.id}
           mode="outlined"
           onPress={onPress}

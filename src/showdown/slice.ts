@@ -5,6 +5,8 @@ import {ShowdownState, Stat} from './types';
 const INITIAL_STATE = {
   stats: [],
   basicActives: [],
+  aiDraws: [],
+  aiDiscards: [],
 };
 const showdownSlice = createSlice({
   name: 'Showdown',
@@ -26,6 +28,11 @@ const showdownSlice = createSlice({
     select: (state: ShowdownState, action: any) => {
       state.selectedCardId = action.payload.id;
       state.selectedDeckId = action.payload.deck;
+    },
+    drawAi: (state: ShowdownState) => {
+      const [draw, ...remaindingDraws] = state.aiDraws;
+      state.aiDraws = remaindingDraws;
+      state.aiDiscards = [draw, ...state.aiDiscards];
     },
   },
 });

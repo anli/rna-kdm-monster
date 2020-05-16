@@ -39,6 +39,12 @@ defineFeature(feature, test => {
     });
   };
 
+  const iPressButton = (step: DefineStepFunction) => {
+    step(/^I press "(.*) Button"$/, async (name: string) => {
+      await element(by.id(`Button.${name}`)).tap();
+    });
+  };
+
   test('Data is loaded', ({given, when, then}) => {
     given('data is "First Story"', () => {});
 
@@ -61,6 +67,11 @@ defineFeature(feature, test => {
     iShouldSeeStat(then);
 
     iShouldSeeText(then);
+    iShouldSeeText(then);
+
+    iShouldSeeText(then);
+
+    iPressButton(when);
     iShouldSeeText(then);
   });
 });

@@ -14,6 +14,8 @@ Feature: First Story
     Then I should see "Monster Text"
     Then I should see "Basic Action Text"
 
+    Then I should see "AI (8) Text"
+
   Scenario: Stat is press
     Given data is "First Story"
     When I am at "Showdown Screen"
@@ -29,7 +31,15 @@ Feature: First Story
   Scenario: Basic active card is press
     Given data is "First Story"
     When I am at "Showdown Screen"
-    When I press active card "Basic Action"
-    Then I should see selected card "Basic Action"
-    Then I should see selected image "Basic Action"
+    When I press "WHITE_LION_BASIC_ACTION Card"
+    Then I should see "WHITE_LION_BASIC_ACTION Card Selected"
+    Then I should see "WHITE_LION_BASIC_ACTION Card Image"
 
+  Scenario: Draw AI card
+    Given data is "First Story"
+    When I am at "Showdown Screen"
+    When I press "AiDraw Button"
+    Then I should see "Claw Text"
+    When I press "WHITE_LION_AI_CLAW Card"
+    Then I should see "WHITE_LION_AI_CLAW Card Selected"
+    Then I should see "WHITE_LION_AI_CLAW Card Image"

@@ -1,5 +1,6 @@
 import React from 'react';
 import {ScrollView} from 'react-native';
+import {IconButton, List} from 'react-native-paper';
 import styled from 'styled-components/native';
 import {CardImage, Cards, Header, Screen, Stats} from './components';
 import useShowdown from './hooks';
@@ -12,7 +13,7 @@ const ShowdownScreenComponent = () => {
       <Top>
         <ScrollView>
           <CardImage
-            testID={`CARD_IMAGE.${data?.selected?.cardId}`}
+            testID={`CardImage.${data?.selected?.cardId}`}
             imageUrl={data?.selected?.imageUrl}
           />
         </ScrollView>
@@ -26,14 +27,39 @@ const ShowdownScreenComponent = () => {
       </Top>
       <Bottom>
         <Header title={data?.monsterName} description={data?.encounterName} />
-        <ActiveCards>
+        <CardsContainer>
           <Cards
+            testID="Cards"
             data={data?.actives}
             onPress={actions?.onSelectActive}
             selected={data?.selected}
             deckId="actives"
           />
-        </ActiveCards>
+        </CardsContainer>
+
+        <List.Item
+          title={`AI (${data?.ai.draws.length})`}
+          right={props => (
+            <>
+              <IconButton
+                testID="Button.AiDraw"
+                disabled={!(data?.ai.draws.length > 0)}
+                {...props}
+                icon="hand-okay"
+                onPress={actions?.onDrawAi}
+              />
+            </>
+          )}
+        />
+        <CardsContainer>
+          <Cards
+            testID="Cards"
+            data={data?.ai.discards}
+            onPress={actions?.onSelectAi}
+            selected={data?.selected}
+            deckId="ais"
+          />
+        </CardsContainer>
       </Bottom>
     </Screen>
   );
@@ -61,6 +87,6 @@ const Top = styled.View`
 
 const Bottom = styled.View``;
 
-const ActiveCards = styled.View`
+const CardsContainer = styled.View`
   margin-left: 16px;
 `;
