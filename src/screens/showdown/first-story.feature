@@ -83,3 +83,11 @@ Feature: First Story
 
     When I press "HitDiscardsShuffle Button"
     Then I should see "Hit Location (23) Text"
+
+  Scenario: Roll Dice
+    Given data is "First Story"
+    When I am at "Showdown Screen"
+    When I press "SelectedROLL_TEN Button"
+    When I press "SelectedROLL_SIX Button"
+    When I press "SelectedROLL_HIT Button"
+    Then I should see "Dice Result"

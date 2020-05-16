@@ -1,6 +1,6 @@
 import React from 'react';
 import {ScrollView, View} from 'react-native';
-import {Badge, IconButton, List} from 'react-native-paper';
+import {Avatar, Badge, IconButton, List} from 'react-native-paper';
 import styled from 'styled-components/native';
 import {
   CardImage,
@@ -34,6 +34,16 @@ const ShowdownScreenComponent = () => {
         <SelectedButtonsContainer>
           <SelectedButtons data={data?.selected?.buttons} actions={actions} />
         </SelectedButtonsContainer>
+        <DiceResults>
+          {data?.diceResults.map((dice, index) => (
+            <DiceResult
+              testID={`DiceResult.${index}`}
+              key={index}
+              icon={dice.icon}
+              size={32}
+            />
+          ))}
+        </DiceResults>
       </Top>
       <Bottom>
         <Header title={data?.monsterName} description={data?.encounterName} />
@@ -160,4 +170,17 @@ const SelectedButtonsContainer = styled.View`
   bottom: 0;
   right: 0;
   margin: 12px 8px 12px 8px;
+`;
+
+const DiceResults = styled.View`
+  position: absolute;
+  bottom: 8px;
+  right: 0;
+  left: 0;
+  flex-direction: row;
+  justify-content: center;
+`;
+
+const DiceResult = styled(Avatar.Icon)`
+  margin-left: 8px;
 `;

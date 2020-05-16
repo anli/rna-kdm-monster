@@ -186,4 +186,17 @@ defineFeature(feature, test => {
     iEventButton(when);
     iShouldSeeText(then);
   });
+
+  test('Roll Dice', ({given, when, then}) => {
+    given('data is "First Story"', () => {});
+    iAmAtScreen(when);
+    iEventButton(when);
+    iEventButton(when);
+    iEventButton(when);
+    then('I should see "Dice Result"', () => {
+      expect(component.getByTestId('DiceResult.0')).toBeDefined();
+      expect(component.getByTestId('DiceResult.1')).toBeDefined();
+      expect(component.getByTestId('DiceResult.2')).toBeDefined();
+    });
+  });
 });

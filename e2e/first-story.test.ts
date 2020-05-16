@@ -115,5 +115,7 @@ defineFeature(feature, test => {
     iShouldSeeText(then);
     iPressButton(when);
     iShouldSeeText(then);
+
+    iPressButton(when);
   });
 });

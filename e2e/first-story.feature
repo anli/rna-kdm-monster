@@ -44,3 +44,5 @@ Feature: First Story
     Then I should see "Hit Location (22) Text"
     When I press "HitDiscardsShuffle Button"
     Then I should see "Hit Location (23) Text"
+
+    When I press "SelectedROLL_TEN Button"

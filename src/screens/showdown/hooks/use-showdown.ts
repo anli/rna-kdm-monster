@@ -2,12 +2,14 @@ import {ShowdownSelectors, showdownSlice} from '@showdown';
 import {State} from '@store';
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import useDices from './use-dices';
 import useStats from './use-stats';
 
 const useShowdown = () => {
   const state = useSelector<State, State>(res => res);
   const dispatch = useDispatch();
   const {data: stats, actions: statsActions} = useStats();
+  const {data: diceResults, actions: diceActions} = useDices();
 
   useEffect(() => {
     dispatch(showdownSlice.actions.load('WHITE_LION_FIRST_STORY'));
@@ -21,10 +23,12 @@ const useShowdown = () => {
     selected: ShowdownSelectors.selected(state),
     ai: ShowdownSelectors.ai(state),
     hit: ShowdownSelectors.hit(state),
+    diceResults,
   };
 
   const actions = {
     ...statsActions,
+    ...diceActions,
     onSelectActive: (id: string) =>
       dispatch(showdownSlice.actions.select({id, deck: 'actives'})),
     onSelectAi: (id: string) =>
