@@ -16,6 +16,8 @@ Feature: First Story
 
     Then I should see "AI (8) Text"
 
+    Then I should see "Hit Location (23) Text"
+
   Scenario: Stat is press
     Given data is "First Story"
     When I am at "Showdown Screen"
@@ -31,8 +33,8 @@ Feature: First Story
   Scenario: Basic active card is press
     Given data is "First Story"
     When I am at "Showdown Screen"
-    When I press "WHITE_LION_BASIC_ACTION ActiveCards"
-    Then I should see "WHITE_LION_BASIC_ACTION ActiveCards Selected"
+    When I press "1 ActiveCards"
+    Then I should see "1 ActiveCards Selected"
     Then I should see "WHITE_LION_BASIC_ACTION Card Image"
 
   Scenario: Draw AI card
@@ -40,15 +42,15 @@ Feature: First Story
     When I am at "Showdown Screen"
     When I press "AiDraw Button"
     Then I should see "Claw Text"
-    When I press "WHITE_LION_AI_CLAW AiCards"
-    Then I should see "WHITE_LION_AI_CLAW AiCards Selected"
+    When I press "0 AiCards"
+    Then I should see "0 AiCards Selected"
     Then I should see "WHITE_LION_AI_CLAW Card Image"
 
     When I press "SelectedACTIVE Button"
-    Then I should see "Claw ActiveCards"
+    Then I should see "0 ActiveCards"
 
     When I press "SelectedDISCARD Button"
-    Then I should see "Claw AiCards"
+    Then I should see "0 AiCards"
 
     When I press "AiDiscardsShuffle Button"
     Then I should not see "Claw Text"
@@ -64,3 +66,21 @@ Feature: First Story
 
     When I longPress "AiWound Button"
     Then I should see "0 AI Wound"
+
+  Scenario: Draw Hit card
+    Given data is "First Story"
+    When I am at "Showdown Screen"
+    When I press "HitDraw Button"
+    Then I should see "Hit Location (22) Text"
+
+    When I press "0 HitCards"
+    Then I should see "0 HitCards Selected"
+
+    # When I press "SelectedACTIVE Button"
+    # Then I should see "Claw ActiveCards"
+
+    # When I press "SelectedDISCARD Button"
+    # Then I should see "Claw AiCards"
+
+    When I press "HitDiscardsShuffle Button"
+    Then I should see "Hit Location (23) Text"

@@ -20,6 +20,7 @@ const useShowdown = () => {
     actives: ShowdownSelectors.actives(state),
     selected: ShowdownSelectors.selected(state),
     ai: ShowdownSelectors.ai(state),
+    hit: ShowdownSelectors.hit(state),
   };
 
   const actions = {
@@ -35,6 +36,11 @@ const useShowdown = () => {
     onUnwoundAi: () => dispatch(showdownSlice.actions.unwoundAi()),
     onActiveSelected: () => dispatch(showdownSlice.actions.activeSelected()),
     onDiscardSelected: () => dispatch(showdownSlice.actions.discardSelected()),
+    onDrawHit: () => dispatch(showdownSlice.actions.drawHit()),
+    onSelectHit: (id: string) =>
+      dispatch(showdownSlice.actions.select({id, deck: 'hits'})),
+    onShuffleHitDiscards: () =>
+      dispatch(showdownSlice.actions.shuffleHitDiscards()),
   };
 
   return {data, actions};

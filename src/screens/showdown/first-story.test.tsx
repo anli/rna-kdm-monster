@@ -83,11 +83,11 @@ defineFeature(feature, test => {
     });
   };
 
-  const iShouldSeeCard = (step: DefineStepFunction) => {
+  const iShouldSeeCard = (step: DefineStepFunction, expected) => {
     step(/^I should see "(.*) (.*)"$/, (value: string, name: string) => {
       expect(
         String(component.queryByTestId(`${name}`)?.props.data[0].name),
-      ).toEqual(value);
+      ).toEqual(expected);
     });
   };
 
@@ -106,6 +106,8 @@ defineFeature(feature, test => {
     iShouldSeeStat(then);
 
     iShouldSeeText(then);
+    iShouldSeeText(then);
+
     iShouldSeeText(then);
 
     iShouldSeeText(then);
@@ -146,9 +148,9 @@ defineFeature(feature, test => {
     iShouldSeeCardImage(then);
 
     iEventButton(when);
-    iShouldSeeCard(then);
+    iShouldSeeCard(then, 'Claw');
     iEventButton(when);
-    iShouldSeeCard(then);
+    iShouldSeeCard(then, 'Claw');
 
     iEventButton(when);
     iShouldNotSeeText(then);
@@ -165,5 +167,17 @@ defineFeature(feature, test => {
 
     iEventButton(when);
     iShouldSeeAiWound(then);
+  });
+
+  test('Draw Hit card', ({given, when, then}) => {
+    given('data is "First Story"', () => {});
+    iAmAtScreen(when);
+    iEventButton(when);
+    iShouldSeeText(then);
+
+    iPressCard(when);
+    iShouldSeeCardSelected(then);
+    iEventButton(when);
+    iShouldSeeText(then);
   });
 });

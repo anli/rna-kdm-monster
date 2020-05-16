@@ -89,6 +89,36 @@ const ShowdownScreenComponent = () => {
             deckId="ais"
           />
         </CardsContainer>
+
+        <List.Item
+          title={`Hit Location (${data?.hit.draws.length})`}
+          right={props => (
+            <>
+              <IconButton
+                {...props}
+                testID="Button.HitDiscardsShuffle"
+                icon="cards"
+                onPress={actions?.onShuffleHitDiscards}
+              />
+              <IconButton
+                testID="Button.HitDraw"
+                disabled={!(data?.hit.draws.length > 0)}
+                {...props}
+                icon="hand-okay"
+                onPress={actions?.onDrawHit}
+              />
+            </>
+          )}
+        />
+        <CardsContainer>
+          <Cards
+            testID="HitCards"
+            data={data?.hit.discards}
+            onPress={actions?.onSelectHit}
+            selected={data?.selected}
+            deckId="hits"
+          />
+        </CardsContainer>
       </Bottom>
     </Screen>
   );

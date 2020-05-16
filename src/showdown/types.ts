@@ -12,6 +12,10 @@ export interface ShowdownState {
   cards: Card[];
   aiWounds: Card[];
   aiActives: Card[];
+  hitCards: Card[];
+  hitDraws: Card[];
+  hitDiscards: Card[];
+  hitActives: Card[];
 }
 
 export interface Encounter {
@@ -21,6 +25,7 @@ export interface Encounter {
   stats: Stat[];
   basicActives: Card[];
   aiCards: Card[];
+  hitCards: Card[];
 }
 
 export interface Stat {

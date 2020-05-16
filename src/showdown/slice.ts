@@ -12,6 +12,10 @@ const INITIAL_STATE = {
   aiCards: [],
   aiWounds: [],
   aiActives: [],
+  hitCards: [],
+  hitDraws: [],
+  hitDiscards: [],
+  hitActives: [],
 };
 const showdownSlice = createSlice({
   name: 'Showdown',
@@ -76,6 +80,17 @@ const showdownSlice = createSlice({
       );
       state.aiDiscards = R.concat([card], state.aiDiscards);
       state.selectedDeckId = 'ais';
+    },
+    drawHit: (state: ShowdownState) => {
+      const [card, ...remainding] = state.hitDraws;
+      state.hitDraws = remainding;
+      state.hitDiscards = [card, ...state.hitDiscards];
+      state.selectedCardId = card.id;
+      state.selectedDeckId = 'hits';
+    },
+    shuffleHitDiscards: (state: ShowdownState) => {
+      state.hitDraws = shuffle([...state.hitDraws, ...state.hitDiscards]);
+      state.hitDiscards = [];
     },
   },
 });

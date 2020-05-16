@@ -44,6 +44,13 @@ const getButtons = (card?: Card, deckId?: string) => {
   return buttons;
 };
 
+const hit = (state: State) => {
+  return {
+    draws: state.showdown.hitDraws,
+    discards: state.showdown.hitDiscards,
+  };
+};
+
 export default class {
   static monsterName = monsterName;
   static encounterName = encounterName;
@@ -51,4 +58,5 @@ export default class {
   static actives = actives;
   static selected = selected;
   static ai = ai;
+  static hit = hit;
 }

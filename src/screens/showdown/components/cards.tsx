@@ -17,7 +17,7 @@ interface Props {
 
 const Cards = ({data, onPress: _onPress, selected, deckId, testID}: Props) => (
   <Container horizontal showsHorizontalScrollIndicator={false} testID={testID}>
-    {data?.map(card => {
+    {data?.map((card, index) => {
       const isSelected = getSelected(
         card.id,
         deckId,
@@ -28,7 +28,7 @@ const Cards = ({data, onPress: _onPress, selected, deckId, testID}: Props) => (
       const onPress = () => _onPress(card.id);
       return (
         <Chip
-          testID={`${testID}.${card.id}`}
+          testID={`${testID}.${index}`}
           key={card.id}
           mode="outlined"
           onPress={onPress}
@@ -42,7 +42,10 @@ const Cards = ({data, onPress: _onPress, selected, deckId, testID}: Props) => (
 
 export default Cards;
 
-const Container = styled.ScrollView``;
+const Container = styled.ScrollView`
+  max-height: 32px;
+  min-height: 32px;
+`;
 
 const Chip = styled(UnstyledChip)`
   margin-right: 8px;

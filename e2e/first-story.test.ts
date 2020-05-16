@@ -109,5 +109,11 @@ defineFeature(feature, test => {
     iShouldSeeAiWound(then);
     iLongPressButton(when);
     iShouldSeeAiWound(then);
+
+    iShouldSeeText(then);
+    iPressButton(when);
+    iShouldSeeText(then);
+    iPressButton(when);
+    iShouldSeeText(then);
   });
 });
