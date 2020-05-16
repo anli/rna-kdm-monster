@@ -10,7 +10,11 @@ const encounterName = (state: State) => state.showdown.encounterName;
 const stats = (state: State) => state.showdown.stats;
 
 const actives = (state: State) => {
-  return [...state.showdown.aiActives, ...state.showdown.basicActives];
+  return [
+    ...state.showdown.hitActives,
+    ...state.showdown.aiActives,
+    ...state.showdown.basicActives,
+  ];
 };
 
 const selected = (state: State) => {
@@ -39,6 +43,11 @@ const getButtons = (card?: Card, deckId?: string) => {
   if (card?.type === 'AI') {
     deckId === 'actives' && buttons.push('DISCARD');
     deckId === 'ais' && buttons.push('ACTIVE');
+  }
+
+  if (card?.type === 'HIT') {
+    deckId === 'actives' && buttons.push('DISCARD');
+    deckId === 'hits' && buttons.push('ACTIVE');
   }
 
   return buttons;

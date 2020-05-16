@@ -61,25 +61,27 @@ const showdownSlice = createSlice({
         state.aiDraws = [card, ...state.aiDraws];
       }
     },
-    activeSelected: (state: ShowdownState) => {
+    activeSelected: (state: any) => {
       const card: any = R.find(R.propEq('id', state.selectedCardId))(
-        state.aiDiscards,
+        state.cards,
       );
-      state.aiDiscards = R.reject(R.propEq('id', state.selectedCardId))(
-        state.aiDiscards,
+      const key = card.type.toLowerCase();
+      state[`${key}Discards`] = R.reject(R.propEq('id', state.selectedCardId))(
+        state[`${key}Discards`],
       );
-      state.aiActives = R.concat([card], state.aiActives);
+      state[`${key}Actives`] = R.concat([card], state[`${key}Actives`]);
       state.selectedDeckId = 'actives';
     },
-    discardSelected: (state: ShowdownState) => {
+    discardSelected: (state: any) => {
       const card: any = R.find(R.propEq('id', state.selectedCardId))(
-        state.aiActives,
+        state.cards,
       );
-      state.aiActives = R.reject(R.propEq('id', state.selectedCardId))(
-        state.aiActives,
+      const key = card.type.toLowerCase();
+      state[`${key}Actives`] = R.reject(R.propEq('id', state.selectedCardId))(
+        state[`${key}Actives`],
       );
-      state.aiDiscards = R.concat([card], state.aiDiscards);
-      state.selectedDeckId = 'ais';
+      state[`${key}Discards`] = R.concat([card], state[`${key}Discards`]);
+      state.selectedDeckId = `${key}s`;
     },
     drawHit: (state: ShowdownState) => {
       const [card, ...remainding] = state.hitDraws;

@@ -177,6 +177,12 @@ defineFeature(feature, test => {
 
     iPressCard(when);
     iShouldSeeCardSelected(then);
+
+    iPressCard(when);
+    iShouldSeeCardSelected(then);
+    iPressCard(when);
+    iShouldSeeCardSelected(then);
+
     iEventButton(when);
     iShouldSeeText(then);
   });

@@ -261,7 +261,7 @@ const ENCOUNTER: {[key: string]: Encounter} = {
     ],
     basicActives: [CARD.WHITE_LION_MONSTER, CARD.WHITE_LION_BASIC_ACTION],
     aiCards: getWhiteLionAiCards(),
-    hitCards: R.values(WHITE_LION_HIT_CARD),
+    hitCards: shuffle(R.values(WHITE_LION_HIT_CARD)),
   },
 };
 

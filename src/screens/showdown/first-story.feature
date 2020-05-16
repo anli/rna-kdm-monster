@@ -76,11 +76,10 @@ Feature: First Story
     When I press "0 HitCards"
     Then I should see "0 HitCards Selected"
 
-    # When I press "SelectedACTIVE Button"
-    # Then I should see "Claw ActiveCards"
-
-    # When I press "SelectedDISCARD Button"
-    # Then I should see "Claw AiCards"
+    When I press "SelectedACTIVE Button"
+    Then I should see "0 ActiveCards Selected"
+    When I press "SelectedDISCARD Button"
+    Then I should see "0 HitCards Selected"
 
     When I press "HitDiscardsShuffle Button"
     Then I should see "Hit Location (23) Text"
