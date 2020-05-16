@@ -26,4 +26,5 @@ export default CardImage;
 
 const Image = styled(FastImage)`
   height: 500px;
+  flex: 1;
 `;
