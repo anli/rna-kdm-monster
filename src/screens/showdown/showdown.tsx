@@ -2,7 +2,14 @@ import React from 'react';
 import {ScrollView, View} from 'react-native';
 import {Badge, IconButton, List} from 'react-native-paper';
 import styled from 'styled-components/native';
-import {CardImage, Cards, Header, Screen, Stats} from './components';
+import {
+  CardImage,
+  Cards,
+  Header,
+  Screen,
+  SelectedButtons,
+  Stats,
+} from './components';
 import useShowdown from './hooks';
 
 const ShowdownScreenComponent = () => {
@@ -24,12 +31,15 @@ const ShowdownScreenComponent = () => {
             onLongPress={actions?.onDecreaseStat}
           />
         </StatsContainer>
+        <SelectedButtonsContainer>
+          <SelectedButtons data={data?.selected?.buttons} actions={actions} />
+        </SelectedButtonsContainer>
       </Top>
       <Bottom>
         <Header title={data?.monsterName} description={data?.encounterName} />
         <CardsContainer>
           <Cards
-            testID="Cards"
+            testID="ActiveCards"
             data={data?.actives}
             onPress={actions?.onSelectActive}
             selected={data?.selected}
@@ -72,7 +82,7 @@ const ShowdownScreenComponent = () => {
         />
         <CardsContainer>
           <Cards
-            testID="Cards"
+            testID="AiCards"
             data={data?.ai.discards}
             onPress={actions?.onSelectAi}
             selected={data?.selected}
@@ -113,4 +123,11 @@ const CardsContainer = styled.View`
 const ButtonBadge = styled(Badge)`
   position: absolute;
   bottom: 0;
+`;
+
+const SelectedButtonsContainer = styled.View`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 12px 8px 12px 8px;
 `;

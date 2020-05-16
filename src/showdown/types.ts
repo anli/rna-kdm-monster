@@ -11,6 +11,7 @@ export interface ShowdownState {
   aiCards: Card[];
   cards: Card[];
   aiWounds: Card[];
+  aiActives: Card[];
 }
 
 export interface Encounter {

@@ -63,11 +63,17 @@ defineFeature(feature, test => {
     });
   };
 
+  const iShouldSeeCard = (step: DefineStepFunction) => {
+    step(/^I should see "(.*) (.*)"$/, async (value: string, name: string) => {
+      await expect(
+        element(by.text(value).withAncestor(by.id(name))),
+      ).toBeVisible();
+    });
+  };
+
   test('Data is loaded', ({given, when, then}) => {
     given('data is "First Story"', () => {});
-
     when('I am at "Showdown Screen"', () => {});
-
     iShouldSeeText(then);
     iShouldSeeText(then);
 
@@ -88,16 +94,19 @@ defineFeature(feature, test => {
     iShouldSeeText(then);
 
     iShouldSeeText(then);
-
     iPressButton(when);
     iShouldSeeText(then);
+
+    iPressButton(when);
+    iShouldSeeCard(then);
+    iPressButton(when);
+    iShouldSeeCard(then);
 
     iPressButton(when);
     iShouldNotSeeText(then);
 
     iPressButton(when);
     iShouldSeeAiWound(then);
-
     iLongPressButton(when);
     iShouldSeeAiWound(then);
   });

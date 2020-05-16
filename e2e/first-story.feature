@@ -26,6 +26,11 @@ Feature: First Story
     When I press "AiDraw Button"
     Then I should see "Claw Text"
 
+    When I press "SelectedACTIVE Button"
+    Then I should see "Claw ActiveCards"
+    When I press "SelectedDISCARD Button"
+    Then I should see "Claw AiCards"
+
     When I press "AiDiscardsShuffle Button"
     Then I should not see "Claw Text"
 

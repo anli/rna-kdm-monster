@@ -33,6 +33,8 @@ const useShowdown = () => {
       dispatch(showdownSlice.actions.shuffleAiDiscards()),
     onWoundAi: () => dispatch(showdownSlice.actions.woundAi()),
     onUnwoundAi: () => dispatch(showdownSlice.actions.unwoundAi()),
+    onActiveSelected: () => dispatch(showdownSlice.actions.activeSelected()),
+    onDiscardSelected: () => dispatch(showdownSlice.actions.discardSelected()),
   };
 
   return {data, actions};

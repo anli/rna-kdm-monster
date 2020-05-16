@@ -16,7 +16,7 @@ interface Props {
 }
 
 const Cards = ({data, onPress: _onPress, selected, deckId, testID}: Props) => (
-  <Container horizontal showsHorizontalScrollIndicator={false}>
+  <Container horizontal showsHorizontalScrollIndicator={false} testID={testID}>
     {data?.map(card => {
       const isSelected = getSelected(
         card.id,

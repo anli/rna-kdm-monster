@@ -31,8 +31,8 @@ Feature: First Story
   Scenario: Basic active card is press
     Given data is "First Story"
     When I am at "Showdown Screen"
-    When I press "WHITE_LION_BASIC_ACTION Card"
-    Then I should see "WHITE_LION_BASIC_ACTION Card Selected"
+    When I press "WHITE_LION_BASIC_ACTION ActiveCards"
+    Then I should see "WHITE_LION_BASIC_ACTION ActiveCards Selected"
     Then I should see "WHITE_LION_BASIC_ACTION Card Image"
 
   Scenario: Draw AI card
@@ -40,9 +40,15 @@ Feature: First Story
     When I am at "Showdown Screen"
     When I press "AiDraw Button"
     Then I should see "Claw Text"
-    When I press "WHITE_LION_AI_CLAW Card"
-    Then I should see "WHITE_LION_AI_CLAW Card Selected"
+    When I press "WHITE_LION_AI_CLAW AiCards"
+    Then I should see "WHITE_LION_AI_CLAW AiCards Selected"
     Then I should see "WHITE_LION_AI_CLAW Card Image"
+
+    When I press "SelectedACTIVE Button"
+    Then I should see "Claw ActiveCards"
+
+    When I press "SelectedDISCARD Button"
+    Then I should see "Claw AiCards"
 
     When I press "AiDiscardsShuffle Button"
     Then I should not see "Claw Text"

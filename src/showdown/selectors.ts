@@ -10,18 +10,18 @@ const encounterName = (state: State) => state.showdown.encounterName;
 const stats = (state: State) => state.showdown.stats;
 
 const actives = (state: State) => {
-  return [...state.showdown.basicActives];
+  return [...state.showdown.aiActives, ...state.showdown.basicActives];
 };
 
 const selected = (state: State) => {
   const cardId = state.showdown.selectedCardId;
-  const imageUrl = cardId
-    ? R.find<Card>(R.propEq('id', cardId))(state.showdown.cards)?.imageUrl
-    : undefined;
+  const card = R.find<Card>(R.propEq('id', cardId))(state.showdown.cards);
+  const imageUrl = cardId ? card?.imageUrl : undefined;
   return {
     cardId: state.showdown.selectedCardId,
     deckId: state.showdown.selectedDeckId,
     imageUrl,
+    buttons: getButtons(card, state.showdown.selectedDeckId),
   };
 };
 
@@ -31,6 +31,17 @@ const ai = (state: State) => {
     discards: state.showdown.aiDiscards,
     wounds: state.showdown.aiWounds,
   };
+};
+
+const getButtons = (card?: Card, deckId?: string) => {
+  let buttons = [];
+
+  if (card?.type === 'AI') {
+    deckId === 'actives' && buttons.push('DISCARD');
+    deckId === 'ais' && buttons.push('ACTIVE');
+  }
+
+  return buttons;
 };
 
 export default class {

@@ -47,17 +47,20 @@ defineFeature(feature, test => {
   };
 
   const iPressCard = (step: DefineStepFunction) => {
-    step(/^I press "(.*) Card"$/, (name: string) => {
-      fireEvent(component.getByTestId(`Cards.${name}`), 'press');
+    step(/^I press "(.*) (.*)"$/, (name: string, deck: string) => {
+      fireEvent(component.getByTestId(`${deck}.${name}`), 'press');
     });
   };
 
   const iShouldSeeCardSelected = (step: DefineStepFunction) => {
-    step(/^I should see "(.*) Card Selected"$/, (name: string) => {
-      expect(component.queryByTestId(`Cards.${name}`)?.props.selected).toBe(
-        true,
-      );
-    });
+    step(
+      /^I should see "(.*) (.*) Selected"$/,
+      (name: string, deck: string) => {
+        expect(component.queryByTestId(`${deck}.${name}`)?.props.selected).toBe(
+          true,
+        );
+      },
+    );
   };
 
   const iShouldSeeCardImage = (step: DefineStepFunction) => {
@@ -76,6 +79,14 @@ defineFeature(feature, test => {
     step(/^I should see "(.*) AI Wound"$/, (value: string) => {
       expect(
         String(component.queryByTestId('AiWoundCounter')?.props.children),
+      ).toEqual(value);
+    });
+  };
+
+  const iShouldSeeCard = (step: DefineStepFunction) => {
+    step(/^I should see "(.*) (.*)"$/, (value: string, name: string) => {
+      expect(
+        String(component.queryByTestId(`${name}`)?.props.data[0].name),
       ).toEqual(value);
     });
   };
@@ -133,6 +144,11 @@ defineFeature(feature, test => {
     iPressCard(when);
     iShouldSeeCardSelected(then);
     iShouldSeeCardImage(then);
+
+    iEventButton(when);
+    iShouldSeeCard(then);
+    iEventButton(when);
+    iShouldSeeCard(then);
 
     iEventButton(when);
     iShouldNotSeeText(then);

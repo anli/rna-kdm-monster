@@ -11,6 +11,7 @@ const INITIAL_STATE = {
   cards: [],
   aiCards: [],
   aiWounds: [],
+  aiActives: [],
 };
 const showdownSlice = createSlice({
   name: 'Showdown',
@@ -55,6 +56,26 @@ const showdownSlice = createSlice({
         state.aiWounds = remainding;
         state.aiDraws = [card, ...state.aiDraws];
       }
+    },
+    activeSelected: (state: ShowdownState) => {
+      const card: any = R.find(R.propEq('id', state.selectedCardId))(
+        state.aiDiscards,
+      );
+      state.aiDiscards = R.reject(R.propEq('id', state.selectedCardId))(
+        state.aiDiscards,
+      );
+      state.aiActives = R.concat([card], state.aiActives);
+      state.selectedDeckId = 'actives';
+    },
+    discardSelected: (state: ShowdownState) => {
+      const card: any = R.find(R.propEq('id', state.selectedCardId))(
+        state.aiActives,
+      );
+      state.aiActives = R.reject(R.propEq('id', state.selectedCardId))(
+        state.aiActives,
+      );
+      state.aiDiscards = R.concat([card], state.aiDiscards);
+      state.selectedDeckId = 'ais';
     },
   },
 });
