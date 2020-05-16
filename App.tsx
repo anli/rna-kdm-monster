@@ -1,19 +1,21 @@
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {HomeScreen} from '@screens';
+import {ShowdownScreen} from '@screens';
+import {store} from '@store';
 import React from 'react';
 import 'react-native-gesture-handler';
 import {Provider as PaperProvider} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {Provider as StoreProvider} from 'react-redux';
 
 const Stack = createStackNavigator();
-const HomeTab = () => (
+const ShowdownTab = () => (
   <Stack.Navigator>
     <Stack.Screen
-      name="HomeScreen"
-      component={HomeScreen.Component}
-      options={HomeScreen.Options}
+      name="ShowdownScreen"
+      component={ShowdownScreen.Component}
+      options={ShowdownScreen.Options}
     />
   </Stack.Navigator>
 );
@@ -22,16 +24,16 @@ const Tab = createMaterialBottomTabNavigator();
 const Tabs = () => {
   return (
     <Tab.Navigator
-      initialRouteName="HomeTab"
+      initialRouteName="ShowdownTab"
       labeled={false}
       activeColor="#000"
       barStyle={WHITE_BACKGROUND_STYLE}>
       <Tab.Screen
         options={{
-          tabBarIcon: ({color}) => <Icon name="home" color={color} size={24} />,
+          tabBarIcon: ({color}) => <Icon name="bug" color={color} size={24} />,
         }}
-        name="HomeTab"
-        component={HomeTab}
+        name="ShowdownTab"
+        component={ShowdownTab}
       />
     </Tab.Navigator>
   );
@@ -39,11 +41,13 @@ const Tabs = () => {
 
 const App = () => {
   return (
-    <PaperProvider>
-      <NavigationContainer>
-        <Tabs />
-      </NavigationContainer>
-    </PaperProvider>
+    <StoreProvider store={store}>
+      <PaperProvider>
+        <NavigationContainer>
+          <Tabs />
+        </NavigationContainer>
+      </PaperProvider>
+    </StoreProvider>
   );
 };
 export default App;
