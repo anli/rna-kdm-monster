@@ -4,12 +4,11 @@ import {Card, Encounter} from './types';
 
 const getData = (encounterId: string) => {
   const encounter = ENCOUNTER[encounterId];
-  const aiCards = getAiCards(encounterId);
 
-  const cards = [...encounter.basicActives, ...aiCards];
+  const cards = R.concat(encounter.basicActives)(encounter.aiCards);
   FastImage.preload(getImageUris(cards));
 
-  return {...encounter, aiDraws: aiCards};
+  return {...encounter, aiDraws: encounter.aiCards, cards};
 };
 
 const WHITE_LION_MONSTER_CARD = {
@@ -78,7 +77,7 @@ const WHITE_LION_AI_CARD = {
   },
 };
 
-export const CARD: {[key: string]: Card} = {
+const CARD: {[key: string]: Card} = {
   ...WHITE_LION_MONSTER_CARD,
   ...WHITE_LION_AI_CARD,
 };
@@ -96,28 +95,22 @@ const ENCOUNTER: {[key: string]: Encounter} = {
       {name: 'ACC', value: 0, hasPrefix: true},
     ],
     basicActives: [CARD.WHITE_LION_MONSTER, CARD.WHITE_LION_BASIC_ACTION],
+    aiCards: [
+      CARD.WHITE_LION_AI_CLAW,
+      CARD.WHITE_LION_AI_CHOMP,
+      CARD.WHITE_LION_AI_SIZE_UP,
+      CARD.WHITE_LION_AI_POWER_SWAT,
+      CARD.WHITE_LION_AI_GRASP,
+      CARD.WHITE_LION_AI_MAUL,
+      CARD.WHITE_LION_AI_TERRIFYING_ROAR,
+      CARD.WHITE_LION_AI_ENRAGED,
+    ],
   },
 };
 
 const getImageUris = R.map(({imageUrl}: {imageUrl: string}) => ({
   uri: imageUrl,
 }));
-
-const getAiCards = (id: string) => {
-  switch (id) {
-    case ENCOUNTER.WHITE_LION_FIRST_STORY.id:
-      return [
-        CARD.WHITE_LION_AI_CLAW,
-        CARD.WHITE_LION_AI_CHOMP,
-        CARD.WHITE_LION_AI_SIZE_UP,
-        CARD.WHITE_LION_AI_POWER_SWAT,
-        CARD.WHITE_LION_AI_GRASP,
-        CARD.WHITE_LION_AI_MAUL,
-        CARD.WHITE_LION_AI_TERRIFYING_ROAR,
-        CARD.WHITE_LION_AI_ENRAGED,
-      ];
-  }
-};
 
 export default class ShowdownService {
   static getData = getData;

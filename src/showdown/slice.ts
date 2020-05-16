@@ -7,6 +7,7 @@ const INITIAL_STATE = {
   basicActives: [],
   aiDraws: [],
   aiDiscards: [],
+  cards: [],
 };
 const showdownSlice = createSlice({
   name: 'Showdown',

@@ -8,6 +8,8 @@ export interface ShowdownState {
   selectedDeckId?: string;
   aiDraws: Card[];
   aiDiscards: Card[];
+  aiCards: Card[];
+  cards: Card[];
 }
 
 export interface Encounter {
@@ -16,6 +18,7 @@ export interface Encounter {
   encounterName: string;
   stats: Stat[];
   basicActives: Card[];
+  aiCards: Card[];
 }
 
 export interface Stat {
