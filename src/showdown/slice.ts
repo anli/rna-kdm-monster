@@ -1,4 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit';
+import {shuffle} from '@utils';
 import R from 'ramda';
 import {ShowdownState, Stat} from './types';
 
@@ -8,6 +9,7 @@ const INITIAL_STATE = {
   aiDraws: [],
   aiDiscards: [],
   cards: [],
+  aiCards: [],
 };
 const showdownSlice = createSlice({
   name: 'Showdown',
@@ -34,6 +36,10 @@ const showdownSlice = createSlice({
       const [draw, ...remaindingDraws] = state.aiDraws;
       state.aiDraws = remaindingDraws;
       state.aiDiscards = [draw, ...state.aiDiscards];
+    },
+    shuffleAiDiscards: (state: ShowdownState) => {
+      state.aiDraws = shuffle([...state.aiDraws, ...state.aiDiscards]);
+      state.aiDiscards = [];
     },
   },
 });

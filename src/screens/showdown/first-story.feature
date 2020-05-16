@@ -43,3 +43,6 @@ Feature: First Story
     When I press "WHITE_LION_AI_CLAW Card"
     Then I should see "WHITE_LION_AI_CLAW Card Selected"
     Then I should see "WHITE_LION_AI_CLAW Card Image"
+
+    When I press "AiDiscardsShuffle Button"
+    Then I should not see "Claw Text"

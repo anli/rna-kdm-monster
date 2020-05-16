@@ -29,6 +29,8 @@ const useShowdown = () => {
     onSelectAi: (id: string) =>
       dispatch(showdownSlice.actions.select({id, deck: 'ais'})),
     onDrawAi: () => dispatch(showdownSlice.actions.drawAi()),
+    onShuffleAiDiscards: () =>
+      dispatch(showdownSlice.actions.shuffleAiDiscards()),
   };
 
   return {data, actions};

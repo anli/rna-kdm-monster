@@ -42,6 +42,12 @@ const ShowdownScreenComponent = () => {
           right={props => (
             <>
               <IconButton
+                {...props}
+                testID="Button.AiDiscardsShuffle"
+                icon="cards"
+                onPress={actions?.onShuffleAiDiscards}
+              />
+              <IconButton
                 testID="Button.AiDraw"
                 disabled={!(data?.ai.draws.length > 0)}
                 {...props}

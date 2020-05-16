@@ -66,6 +66,12 @@ defineFeature(feature, test => {
     });
   };
 
+  const iShouldNotSeeText = (step: DefineStepFunction) => {
+    step(/^I should not see "(.*) Text"$/, (text: string) => {
+      expect(component.queryByText(text)).toBeNull();
+    });
+  };
+
   test('Data is loaded', ({given, when, then}) => {
     given('data is "First Story"', () => {});
 
@@ -119,5 +125,8 @@ defineFeature(feature, test => {
     iPressCard(when);
     iShouldSeeCardSelected(then);
     iShouldSeeCardImage(then);
+
+    iEventButton(when);
+    iShouldNotSeeText(then);
   });
 });

@@ -1,5 +1,5 @@
 import R from 'ramda';
-import {ShowdownState} from './types';
+import {Card, ShowdownState} from './types';
 
 type State = {showdown: ShowdownState};
 
@@ -16,7 +16,7 @@ const actives = (state: State) => {
 const selected = (state: State) => {
   const cardId = state.showdown.selectedCardId;
   const imageUrl = cardId
-    ? R.find(R.propEq('id', cardId))(state.showdown.cards)
+    ? R.find<Card>(R.propEq('id', cardId))(state.showdown.cards)?.imageUrl
     : undefined;
   return {
     cardId: state.showdown.selectedCardId,

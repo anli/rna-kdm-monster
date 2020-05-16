@@ -25,3 +25,6 @@ Feature: First Story
     Then I should see "AI (8) Text"
     When I press "AiDraw Button"
     Then I should see "Claw Text"
+
+    When I press "AiDiscardsShuffle Button"
+    Then I should not see "Claw Text"
