@@ -1,6 +1,6 @@
 import React from 'react';
-import {ScrollView} from 'react-native';
-import {IconButton, List} from 'react-native-paper';
+import {ScrollView, View} from 'react-native';
+import {Badge, IconButton, List} from 'react-native-paper';
 import styled from 'styled-components/native';
 import {CardImage, Cards, Header, Screen, Stats} from './components';
 import useShowdown from './hooks';
@@ -41,6 +41,19 @@ const ShowdownScreenComponent = () => {
           title={`AI (${data?.ai.draws.length})`}
           right={props => (
             <>
+              <View>
+                <IconButton
+                  {...props}
+                  disabled={!(data?.ai.draws.length > 0)}
+                  icon="heart-broken"
+                  testID="Button.AiWound"
+                  onPress={actions?.onWoundAi}
+                  onLongPress={actions?.onUnwoundAi}
+                />
+                <ButtonBadge size={16} testID="AiWoundCounter">
+                  {data?.ai.wounds.length}
+                </ButtonBadge>
+              </View>
               <IconButton
                 {...props}
                 testID="Button.AiDiscardsShuffle"
@@ -95,4 +108,9 @@ const Bottom = styled.View``;
 
 const CardsContainer = styled.View`
   margin-left: 16px;
+`;
+
+const ButtonBadge = styled(Badge)`
+  position: absolute;
+  bottom: 0;
 `;

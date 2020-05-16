@@ -29,6 +29,7 @@ const ai = (state: State) => {
   return {
     draws: state.showdown.aiDraws,
     discards: state.showdown.aiDiscards,
+    wounds: state.showdown.aiWounds,
   };
 };
 

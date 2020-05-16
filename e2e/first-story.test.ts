@@ -51,6 +51,18 @@ defineFeature(feature, test => {
     });
   };
 
+  const iShouldSeeAiWound = (step: DefineStepFunction) => {
+    step(/^I should see "(.*) AI Wound"$/, async (value: string) => {
+      await expect(element(by.text(value))).toBeVisible();
+    });
+  };
+
+  const iLongPressButton = (step: DefineStepFunction) => {
+    step(/^I longPress "(.*) Button"$/, async (name: string) => {
+      await element(by.id(`Button.${name}`)).longPress();
+    });
+  };
+
   test('Data is loaded', ({given, when, then}) => {
     given('data is "First Story"', () => {});
 
@@ -82,5 +94,11 @@ defineFeature(feature, test => {
 
     iPressButton(when);
     iShouldNotSeeText(then);
+
+    iPressButton(when);
+    iShouldSeeAiWound(then);
+
+    iLongPressButton(when);
+    iShouldSeeAiWound(then);
   });
 });

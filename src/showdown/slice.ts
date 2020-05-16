@@ -10,6 +10,7 @@ const INITIAL_STATE = {
   aiDiscards: [],
   cards: [],
   aiCards: [],
+  aiWounds: [],
 };
 const showdownSlice = createSlice({
   name: 'Showdown',
@@ -33,15 +34,27 @@ const showdownSlice = createSlice({
       state.selectedDeckId = action.payload.deck;
     },
     drawAi: (state: ShowdownState) => {
-      const [draw, ...remaindingDraws] = state.aiDraws;
-      state.aiDraws = remaindingDraws;
-      state.aiDiscards = [draw, ...state.aiDiscards];
-      state.selectedCardId = draw.id;
+      const [card, ...remainding] = state.aiDraws;
+      state.aiDraws = remainding;
+      state.aiDiscards = [card, ...state.aiDiscards];
+      state.selectedCardId = card.id;
       state.selectedDeckId = 'ais';
     },
     shuffleAiDiscards: (state: ShowdownState) => {
       state.aiDraws = shuffle([...state.aiDraws, ...state.aiDiscards]);
       state.aiDiscards = [];
+    },
+    woundAi: (state: ShowdownState) => {
+      const [card, ...remainding] = state.aiDraws;
+      state.aiDraws = remainding;
+      state.aiWounds = [card, ...state.aiWounds];
+    },
+    unwoundAi: (state: ShowdownState) => {
+      if (state.aiWounds.length > 0) {
+        const [card, ...remainding] = state.aiWounds;
+        state.aiWounds = remainding;
+        state.aiDraws = [card, ...state.aiDraws];
+      }
     },
   },
 });

@@ -28,3 +28,8 @@ Feature: First Story
 
     When I press "AiDiscardsShuffle Button"
     Then I should not see "Claw Text"
+
+    When I press "AiWound Button"
+    Then I should see "1 AI Wound"
+    When I longPress "AiWound Button"
+    Then I should see "0 AI Wound"

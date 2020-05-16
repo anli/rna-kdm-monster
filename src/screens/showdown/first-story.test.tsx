@@ -72,6 +72,14 @@ defineFeature(feature, test => {
     });
   };
 
+  const iShouldSeeAiWound = (step: DefineStepFunction) => {
+    step(/^I should see "(.*) AI Wound"$/, (value: string) => {
+      expect(
+        String(component.queryByTestId('AiWoundCounter')?.props.children),
+      ).toEqual(value);
+    });
+  };
+
   test('Data is loaded', ({given, when, then}) => {
     given('data is "First Story"', () => {});
 
@@ -128,5 +136,18 @@ defineFeature(feature, test => {
 
     iEventButton(when);
     iShouldNotSeeText(then);
+  });
+
+  test('Ai Wound is press', ({given, when, then}) => {
+    given('data is "First Story"', () => {});
+    iAmAtScreen(when);
+    iEventButton(when);
+    iShouldSeeAiWound(then);
+
+    iEventButton(when);
+    iShouldSeeAiWound(then);
+
+    iEventButton(when);
+    iShouldSeeAiWound(then);
   });
 });

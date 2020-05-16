@@ -46,3 +46,15 @@ Feature: First Story
 
     When I press "AiDiscardsShuffle Button"
     Then I should not see "Claw Text"
+
+  Scenario: Ai Wound is press
+    Given data is "First Story"
+    When I am at "Showdown Screen"
+    When I press "AiWound Button"
+    Then I should see "1 AI Wound"
+
+    When I longPress "AiWound Button"
+    Then I should see "0 AI Wound"
+
+    When I longPress "AiWound Button"
+    Then I should see "0 AI Wound"

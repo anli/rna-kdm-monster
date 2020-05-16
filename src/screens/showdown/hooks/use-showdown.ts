@@ -31,6 +31,8 @@ const useShowdown = () => {
     onDrawAi: () => dispatch(showdownSlice.actions.drawAi()),
     onShuffleAiDiscards: () =>
       dispatch(showdownSlice.actions.shuffleAiDiscards()),
+    onWoundAi: () => dispatch(showdownSlice.actions.woundAi()),
+    onUnwoundAi: () => dispatch(showdownSlice.actions.unwoundAi()),
   };
 
   return {data, actions};
