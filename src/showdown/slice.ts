@@ -36,6 +36,8 @@ const showdownSlice = createSlice({
       const [draw, ...remaindingDraws] = state.aiDraws;
       state.aiDraws = remaindingDraws;
       state.aiDiscards = [draw, ...state.aiDiscards];
+      state.selectedCardId = draw.id;
+      state.selectedDeckId = 'ais';
     },
     shuffleAiDiscards: (state: ShowdownState) => {
       state.aiDraws = shuffle([...state.aiDraws, ...state.aiDiscards]);
