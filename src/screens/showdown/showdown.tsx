@@ -1,3 +1,4 @@
+import {useScreenDimensions} from '@utils';
 import React from 'react';
 import {ScrollView, View} from 'react-native';
 import {Avatar, Badge, IconButton, List} from 'react-native-paper';
@@ -6,7 +7,7 @@ import {
   CardImage,
   Cards,
   Header,
-  Screen,
+  Screen as UnstyledScreen,
   SelectedButtons,
   Stats,
 } from './components';
@@ -14,10 +15,11 @@ import useShowdown from './hooks';
 
 const ShowdownScreenComponent = () => {
   const {data, actions} = useShowdown();
+  const {isLandscape} = useScreenDimensions();
 
   return (
-    <Screen testID="ShowdownScreen">
-      <Top>
+    <Screen isLandscape={isLandscape} testID="ShowdownScreen">
+      <Top isLandscape={isLandscape}>
         <ScrollView>
           <CardImage
             testID={`CardImage.${data?.selected?.cardId}`}
@@ -45,7 +47,7 @@ const ShowdownScreenComponent = () => {
           ))}
         </DiceResults>
       </Top>
-      <Bottom>
+      <Bottom isLandscape={isLandscape}>
         <Header title={data?.monsterName} description={data?.encounterName} />
         <CardsContainer>
           <Cards
@@ -148,13 +150,18 @@ const StatsContainer = styled.View`
   bottom: 0;
 `;
 
+/* istanbul ignore next */
 const Top = styled.View`
   background-color: grey;
   flex: 1;
-  max-height: 400px;
+  /* max-height: 100%; */
+  max-height: ${props => (props.isLandscape ? '100%' : '400px')};
 `;
 
-const Bottom = styled.View``;
+/* istanbul ignore next */
+const Bottom = styled.View`
+  flex: ${props => (props.isLandscape ? '1' : '0 1 auto')};
+`;
 
 const CardsContainer = styled.View`
   margin-left: 16px;
@@ -183,4 +190,9 @@ const DiceResults = styled.View`
 
 const DiceResult = styled(Avatar.Icon)`
   margin-left: 8px;
+`;
+
+/* istanbul ignore next */
+const Screen = styled(UnstyledScreen)`
+  flex-direction: ${props => (props.isLandscape ? 'row' : 'column')};
 `;
