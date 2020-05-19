@@ -29,6 +29,8 @@ const ICON: {[key: string]: string} = {
   ROLL_TEN: 'dice-d10',
   ROLL_SIX: 'numeric-6-circle',
   ROLL_HIT: 'heart-broken',
+  ADD_TOKEN: 'plus',
+  REMOVE_TOKEN: 'minus',
 };
 
 const ACTIONS: {[key: string]: string} = {
@@ -37,6 +39,8 @@ const ACTIONS: {[key: string]: string} = {
   ROLL_TEN: 'onRollTen',
   ROLL_SIX: 'onRollSix',
   ROLL_HIT: 'onRollHit',
+  ADD_TOKEN: 'onAddTokenSelected',
+  REMOVE_TOKEN: 'onRemoveTokenSelected',
 };
 
 export default SelectedButtons;

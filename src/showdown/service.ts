@@ -65,6 +65,7 @@ const WHITE_LION_AI_CARD = {
     type: 'AI',
     subType: 'MOOD',
     level: 'A',
+    token: 0,
   },
   WHITE_LION_AI_BLOODY_CLAW: {
     id: 'WHITE_LION_AI_BLOODY_CLAW',

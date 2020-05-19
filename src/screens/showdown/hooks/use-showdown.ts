@@ -49,6 +49,10 @@ const useShowdown = () => {
     onShuffleHitDiscards: () =>
       dispatch(showdownSlice.actions.shuffleHitDiscards()),
     onSelectEncounter: () => navigate('EncounterSelectScreen'),
+    onAddTokenSelected: () =>
+      dispatch(showdownSlice.actions.addTokenSelected()),
+    onRemoveTokenSelected: () =>
+      dispatch(showdownSlice.actions.removeTokenSelected()),
   };
 
   return {data, actions};

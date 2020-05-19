@@ -1,3 +1,4 @@
+import R from 'ramda';
 import React from 'react';
 import {Chip as UnstyledChip} from 'react-native-paper';
 import styled from 'styled-components/native';
@@ -5,6 +6,7 @@ import styled from 'styled-components/native';
 interface Card {
   id: string;
   name: string;
+  token?: number;
 }
 
 interface Props {
@@ -33,7 +35,7 @@ const Cards = ({data, onPress: _onPress, selected, deckId, testID}: Props) => (
           mode="outlined"
           onPress={onPress}
           selected={isSelected}>
-          {card.name}
+          {getCardLabel(card)}
         </Chip>
       );
     })}
@@ -59,3 +61,11 @@ const getSelected = (
   selectedCardId: string = '',
   selectedDeckId: string = '',
 ) => cardId === selectedCardId && deckId === selectedDeckId;
+
+const getCardLabel = (card: Card) => {
+  if (!R.isNil(card.token)) {
+    return `${card.name} (${card?.token})`;
+  }
+
+  return card.name;
+};

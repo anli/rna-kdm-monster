@@ -51,6 +51,12 @@ const getButtons = (card?: Card, deckId?: string) => {
     deckId === 'hits' && buttons.push('ACTIVE');
   }
 
+  if (!R.isNil(card?.token)) {
+    deckId === 'actives' &&
+      buttons.push('ADD_TOKEN') &&
+      buttons.push('REMOVE_TOKEN');
+  }
+
   buttons.push('ROLL_SIX');
   buttons.push('ROLL_HIT');
   buttons.push('ROLL_TEN');

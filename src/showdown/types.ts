@@ -39,4 +39,5 @@ export interface Card {
   imageUrl: string;
   name: string;
   type: string;
+  token?: number;
 }

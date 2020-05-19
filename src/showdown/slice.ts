@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {shuffle} from '@utils';
 import R from 'ramda';
-import {ShowdownState, Stat} from './types';
+import {Card, ShowdownState, Stat} from './types';
 
 const INITIAL_STATE = {
   encounterId: 'WHITE_LION_FIRST_STORY',
@@ -94,6 +94,24 @@ const showdownSlice = createSlice({
     shuffleHitDiscards: (state: ShowdownState) => {
       state.hitDraws = shuffle([...state.hitDraws, ...state.hitDiscards]);
       state.hitDiscards = [];
+    },
+    addTokenSelected: (state: ShowdownState) => {
+      const index = R.findIndex(R.propEq('id', state.selectedCardId))(
+        state.aiActives,
+      );
+      state.aiActives = R.adjust<Card>(index, n => ({
+        ...n,
+        token: (n.token || 0) + 1,
+      }))(state.aiActives);
+    },
+    removeTokenSelected: (state: ShowdownState) => {
+      const index = R.findIndex(R.propEq('id', state.selectedCardId))(
+        state.aiActives,
+      );
+      state.aiActives = R.adjust<Card>(index, n => ({
+        ...n,
+        token: (n.token || 0) - 1,
+      }))(state.aiActives);
     },
   },
 });
