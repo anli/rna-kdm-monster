@@ -31,6 +31,9 @@ const ICON: {[key: string]: string} = {
   ROLL_HIT: 'heart-broken',
   ADD_TOKEN: 'plus',
   REMOVE_TOKEN: 'minus',
+  HEAL: 'hospital',
+  AI_TOP: 'format-align-bottom',
+  AI_BOTTOM: 'format-align-top',
 };
 
 const ACTIONS: {[key: string]: string} = {
@@ -41,6 +44,9 @@ const ACTIONS: {[key: string]: string} = {
   ROLL_HIT: 'onRollHit',
   ADD_TOKEN: 'onAddTokenSelected',
   REMOVE_TOKEN: 'onRemoveTokenSelected',
+  HEAL: 'onHeal',
+  AI_TOP: 'onAiTopSelected',
+  AI_BOTTOM: 'onAiBottomSelected',
 };
 
 export default SelectedButtons;

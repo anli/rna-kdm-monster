@@ -113,6 +113,35 @@ const showdownSlice = createSlice({
         token: (n.token || 0) - 1,
       }))(state.aiActives);
     },
+    heal: (state: ShowdownState) => {
+      if (state.aiWounds.length > 0) {
+        const [card, ...remainding] = state.aiWounds;
+        state.aiWounds = remainding;
+        state.aiDraws = [...state.aiDraws, card];
+      }
+    },
+    aiTopSelected: (state: ShowdownState) => {
+      const card = R.find<Card>(R.propEq('id', state.selectedCardId))(
+        state.aiDiscards,
+      );
+      if (card) {
+        state.aiDiscards = R.reject(R.propEq('id', state.selectedCardId))(
+          state.aiDiscards,
+        );
+        state.aiDraws = [card, ...state.aiDraws];
+      }
+    },
+    aiBottomSelected: (state: ShowdownState) => {
+      const card = R.find<Card>(R.propEq('id', state.selectedCardId))(
+        state.aiDiscards,
+      );
+      if (card) {
+        state.aiDiscards = R.reject(R.propEq('id', state.selectedCardId))(
+          state.aiDiscards,
+        );
+        state.aiDraws = [...state.aiDraws, card];
+      }
+    },
   },
 });
 

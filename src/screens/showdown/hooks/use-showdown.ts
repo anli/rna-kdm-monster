@@ -53,6 +53,10 @@ const useShowdown = () => {
       dispatch(showdownSlice.actions.addTokenSelected()),
     onRemoveTokenSelected: () =>
       dispatch(showdownSlice.actions.removeTokenSelected()),
+    onHeal: () => dispatch(showdownSlice.actions.heal()),
+    onAiTopSelected: () => dispatch(showdownSlice.actions.aiTopSelected()),
+    onAiBottomSelected: () =>
+      dispatch(showdownSlice.actions.aiBottomSelected()),
   };
 
   return {data, actions};

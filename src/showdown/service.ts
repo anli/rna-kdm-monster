@@ -114,6 +114,7 @@ const WHITE_LION_AI_CARD = {
     type: 'AI',
     subType: 'NONE',
     level: 'A',
+    heal: 1,
   },
   WHITE_LION_AI_MERCILESS: {
     id: 'WHITE_LION_AI_MERCILESS',
@@ -414,8 +415,8 @@ const getWhiteLionAiLevel1Cards = () => {
   const cards = R.values(CARD);
 
   return shuffle([
-    ...getRandomCardsByLevel('B', 7, cards),
-    ...getRandomCardsByLevel('A', 3, cards),
+    ...getRandomCardsByLevel('B', 10, cards),
+    ...getRandomCardsByLevel('A', 10, cards),
   ]);
 };
 

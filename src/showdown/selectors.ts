@@ -43,7 +43,10 @@ const getButtons = (card?: Card, deckId?: string) => {
 
   if (card?.type === 'AI') {
     deckId === 'actives' && buttons.push('DISCARD');
-    deckId === 'ais' && buttons.push('ACTIVE');
+    deckId === 'ais' &&
+      buttons.push('ACTIVE') &&
+      buttons.push('AI_TOP') &&
+      buttons.push('AI_BOTTOM');
   }
 
   if (card?.type === 'HIT') {
@@ -55,6 +58,10 @@ const getButtons = (card?: Card, deckId?: string) => {
     deckId === 'actives' &&
       buttons.push('ADD_TOKEN') &&
       buttons.push('REMOVE_TOKEN');
+  }
+
+  if (!R.isNil(card?.heal)) {
+    deckId === 'ais' && buttons.push('HEAL');
   }
 
   buttons.push('ROLL_SIX');
