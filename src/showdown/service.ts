@@ -15,12 +15,12 @@ const getData = (encounterId: string) => {
 
   return {
     ...encounter,
-    aiDraws: encounter.aiCards,
+    aiDraws: shuffle(encounter.aiCards),
     aiDiscards: [],
     aiWounds: [],
     aiActives: [],
     cards,
-    hitDraws: encounter.hitCards,
+    hitDraws: shuffle(encounter.hitCards),
     hitDiscards: [],
     hitActives: [],
   };
@@ -414,10 +414,10 @@ const getRandomCardsByLevel = (level: string, count: number, cards: any[]) => {
 const getWhiteLionAiLevel1Cards = () => {
   const cards = R.values(CARD);
 
-  return shuffle([
-    ...getRandomCardsByLevel('B', 10, cards),
-    ...getRandomCardsByLevel('A', 10, cards),
-  ]);
+  return [
+    ...getRandomCardsByLevel('B', 7, cards),
+    ...getRandomCardsByLevel('A', 3, cards),
+  ];
 };
 
 const ENCOUNTER: {[key: string]: Encounter} = {
