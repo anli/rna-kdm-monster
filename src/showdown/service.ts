@@ -420,6 +420,25 @@ const getWhiteLionAiLevel1Cards = () => {
   ];
 };
 
+const getWhiteLionAiLevel2Cards = () => {
+  const cards = R.values(CARD);
+
+  return [
+    ...getRandomCardsByLevel('B', 10, cards),
+    ...getRandomCardsByLevel('A', 5, cards),
+  ];
+};
+
+const getWhiteLionAiLevel3Cards = () => {
+  const cards = R.values(CARD);
+
+  return [
+    ...getRandomCardsByLevel('B', 10, cards),
+    ...getRandomCardsByLevel('A', 9, cards),
+    ...getRandomCardsByLevel('L', 2, cards),
+  ];
+};
+
 const ENCOUNTER: {[key: string]: Encounter} = {
   WHITE_LION_FIRST_STORY: {
     id: 'WHITE_LION_FIRST_STORY',
@@ -431,6 +450,7 @@ const ENCOUNTER: {[key: string]: Encounter} = {
       {name: 'SPD', value: 0, hasPrefix: true},
       {name: 'DMG', value: 0, hasPrefix: true},
       {name: 'ACC', value: 0, hasPrefix: true},
+      {name: 'LCK', value: 0, hasPrefix: true},
     ],
     basicActives: [CARD.WHITE_LION_MONSTER, CARD.WHITE_LION_BASIC_ACTION],
     aiCards: getWhiteLionAiCards(),
@@ -446,9 +466,51 @@ const ENCOUNTER: {[key: string]: Encounter} = {
       {name: 'SPD', value: 0, hasPrefix: true},
       {name: 'DMG', value: 0, hasPrefix: true},
       {name: 'ACC', value: 0, hasPrefix: true},
+      {name: 'LCK', value: 0, hasPrefix: true},
     ],
     basicActives: [CARD.WHITE_LION_MONSTER, CARD.WHITE_LION_BASIC_ACTION],
     aiCards: getWhiteLionAiLevel1Cards(),
+    hitCards: shuffle(R.values(WHITE_LION_HIT_CARD)),
+  },
+  WHITE_LION_LEVEL_2: {
+    id: 'WHITE_LION_LEVEL_2',
+    monsterName: 'White Lion',
+    encounterName: 'Level 2',
+    stats: [
+      {name: 'MOV', value: 7},
+      {name: 'TGH', value: 10},
+      {name: 'SPD', value: 1, hasPrefix: true},
+      {name: 'DMG', value: 1, hasPrefix: true},
+      {name: 'ACC', value: 0, hasPrefix: true},
+      {name: 'LCK', value: 1, hasPrefix: true},
+    ],
+    basicActives: [
+      CARD.WHITE_LION_AI_CUNNING,
+      CARD.WHITE_LION_MONSTER,
+      CARD.WHITE_LION_BASIC_ACTION,
+    ],
+    aiCards: getWhiteLionAiLevel2Cards(),
+    hitCards: shuffle(R.values(WHITE_LION_HIT_CARD)),
+  },
+  WHITE_LION_LEVEL_3: {
+    id: 'WHITE_LION_LEVEL_3',
+    monsterName: 'White Lion',
+    encounterName: 'Level 3',
+    stats: [
+      {name: 'MOV', value: 8},
+      {name: 'TGH', value: 14},
+      {name: 'SPD', value: 2, hasPrefix: true},
+      {name: 'DMG', value: 2, hasPrefix: true},
+      {name: 'ACC', value: 2, hasPrefix: true},
+      {name: 'LCK', value: 1, hasPrefix: true},
+    ],
+    basicActives: [
+      CARD.WHITE_LION_AI_MERCILESS,
+      CARD.WHITE_LION_AI_CUNNING,
+      CARD.WHITE_LION_MONSTER,
+      CARD.WHITE_LION_BASIC_ACTION,
+    ],
+    aiCards: getWhiteLionAiLevel3Cards(),
     hitCards: shuffle(R.values(WHITE_LION_HIT_CARD)),
   },
 };

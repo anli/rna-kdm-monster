@@ -47,6 +47,7 @@ const STATS_ICON: {[key: string]: string} = {
   SPD: 'clock-fast',
   DMG: 'sword',
   ACC: 'target',
+  LCK: 'clover',
 };
 
 const getStatValue = (value: number, hasPrefix = false) => {
