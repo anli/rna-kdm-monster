@@ -1,7 +1,7 @@
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {ShowdownScreen} from '@screens';
+import {EncounterSelectScreen, ShowdownScreen} from '@screens';
 import {store} from '@store';
 import React from 'react';
 import 'react-native-gesture-handler';
@@ -16,6 +16,11 @@ const ShowdownTab = () => (
       name="ShowdownScreen"
       component={ShowdownScreen.Component}
       options={ShowdownScreen.Options}
+    />
+    <Stack.Screen
+      name="EncounterSelectScreen"
+      component={EncounterSelectScreen.Component}
+      options={EncounterSelectScreen.Options}
     />
   </Stack.Navigator>
 );

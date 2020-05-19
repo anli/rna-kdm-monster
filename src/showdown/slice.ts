@@ -4,6 +4,7 @@ import R from 'ramda';
 import {ShowdownState, Stat} from './types';
 
 const INITIAL_STATE = {
+  encounterId: 'WHITE_LION_FIRST_STORY',
   stats: [],
   basicActives: [],
   aiDraws: [],

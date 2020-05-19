@@ -46,3 +46,10 @@ Feature: First Story
     Then I should see "Hit Location (23) Text"
 
     When I press "SelectedROLL_TEN Button"
+
+    When I press "SelectEncounter Button"
+    Then I should see "Select Encounter Text"
+    Then I should see "White Lion First Story Text"
+    Then I should see "White Lion Level 1 Text"
+    When I press "WHITE_LION_LEVEL_1 Button"
+    Then I should see "AI (10) Text"

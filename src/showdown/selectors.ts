@@ -1,4 +1,5 @@
 import R from 'ramda';
+import ShowdownService from './service';
 import {Card, ShowdownState} from './types';
 
 type State = {showdown: ShowdownState};
@@ -64,7 +65,14 @@ const hit = (state: State) => {
   };
 };
 
+const encounters = () => {
+  return R.values(ShowdownService.ENCOUNTER);
+};
+
+const encounterId = (state: State) => state.showdown.encounterId;
+
 export default class {
+  static encounterId = encounterId;
   static monsterName = monsterName;
   static encounterName = encounterName;
   static stats = stats;
@@ -72,4 +80,5 @@ export default class {
   static selected = selected;
   static ai = ai;
   static hit = hit;
+  static encounters = encounters;
 }

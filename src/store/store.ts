@@ -1,4 +1,4 @@
-import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
 import {showdownEpics, showdownSlice} from '@showdown';
 import {combineEpics, createEpicMiddleware} from 'redux-observable';
 
@@ -10,7 +10,7 @@ const rootEpic = (action$: any) => combineEpics(...epics)(action$).pipe();
 const getStore = () => {
   const store = configureStore({
     reducer: {showdown: showdownSlice.reducer},
-    middleware: [...getDefaultMiddleware(), epicMiddleware],
+    middleware: [epicMiddleware],
   });
 
   epicMiddleware.run(rootEpic);
