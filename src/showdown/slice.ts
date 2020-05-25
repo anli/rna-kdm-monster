@@ -18,6 +18,8 @@ const INITIAL_STATE = {
   hitDiscards: [],
   hitActives: [],
 };
+
+/* istanbul ignore next */
 const showdownSlice = createSlice({
   name: 'Showdown',
   initialState: INITIAL_STATE,

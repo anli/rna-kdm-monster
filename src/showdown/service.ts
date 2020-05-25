@@ -15,7 +15,7 @@ const getData = (encounterId: string) => {
 
   return {
     ...encounter,
-    aiDraws: shuffle(encounter.aiCards),
+    aiDraws: shuffleAi(encounter.aiCards, encounterId),
     aiDiscards: [],
     aiWounds: [],
     aiActives: [],
@@ -24,6 +24,16 @@ const getData = (encounterId: string) => {
     hitDiscards: [],
     hitActives: [],
   };
+};
+
+/* istanbul ignore next */
+const shuffleAi = (cards: Card[], encounterId: string) => {
+  if (encounterId === 'WHITE_LION_FIRST_STORY') {
+    const claw = cards[0];
+    return [claw, ...shuffle(R.tail(cards))];
+  }
+
+  return shuffle(cards);
 };
 
 const WHITE_LION_MONSTER_CARD = {

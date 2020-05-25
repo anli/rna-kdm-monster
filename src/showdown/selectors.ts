@@ -38,6 +38,7 @@ const ai = (state: State) => {
   };
 };
 
+/* istanbul ignore next */
 const getButtons = (card?: Card, deckId?: string) => {
   let buttons = [];
 

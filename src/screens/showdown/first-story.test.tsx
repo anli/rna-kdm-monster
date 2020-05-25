@@ -86,7 +86,7 @@ defineFeature(feature, test => {
     });
   };
 
-  const iShouldSeeCard = (step: DefineStepFunction, expected) => {
+  const iShouldSeeCard = (step: DefineStepFunction, expected: string) => {
     step(/^I should see "(.*) (.*)"$/, (value: string, name: string) => {
       expect(
         String(component.queryByTestId(`${name}`)?.props.data[0].name),

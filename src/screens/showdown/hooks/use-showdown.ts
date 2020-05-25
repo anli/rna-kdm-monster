@@ -29,6 +29,7 @@ const useShowdown = () => {
     diceResults,
   };
 
+  /* istanbul ignore next */
   const actions = {
     ...statsActions,
     ...diceActions,

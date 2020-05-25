@@ -62,6 +62,7 @@ const getSelected = (
   selectedDeckId: string = '',
 ) => cardId === selectedCardId && deckId === selectedDeckId;
 
+/* istanbul ignore next */
 const getCardLabel = (card: Card) => {
   if (!R.isNil(card.token)) {
     return `${card.name} (${card?.token})`;
