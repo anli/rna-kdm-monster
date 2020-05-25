@@ -1,4 +1,5 @@
 import R from 'ramda';
+import ShowdownService from './service';
 import {Card, ShowdownState} from './types';
 
 type State = {showdown: ShowdownState};
@@ -37,17 +38,31 @@ const ai = (state: State) => {
   };
 };
 
+/* istanbul ignore next */
 const getButtons = (card?: Card, deckId?: string) => {
   let buttons = [];
 
   if (card?.type === 'AI') {
     deckId === 'actives' && buttons.push('DISCARD');
-    deckId === 'ais' && buttons.push('ACTIVE');
+    deckId === 'ais' &&
+      buttons.push('ACTIVE') &&
+      buttons.push('AI_TOP') &&
+      buttons.push('AI_BOTTOM');
   }
 
   if (card?.type === 'HIT') {
     deckId === 'actives' && buttons.push('DISCARD');
     deckId === 'hits' && buttons.push('ACTIVE');
+  }
+
+  if (!R.isNil(card?.token)) {
+    deckId === 'actives' &&
+      buttons.push('ADD_TOKEN') &&
+      buttons.push('REMOVE_TOKEN');
+  }
+
+  if (!R.isNil(card?.heal)) {
+    deckId === 'ais' && buttons.push('HEAL');
   }
 
   buttons.push('ROLL_SIX');
@@ -64,7 +79,14 @@ const hit = (state: State) => {
   };
 };
 
+const encounters = () => {
+  return R.values(ShowdownService.ENCOUNTER);
+};
+
+const encounterId = (state: State) => state.showdown.encounterId;
+
 export default class {
+  static encounterId = encounterId;
   static monsterName = monsterName;
   static encounterName = encounterName;
   static stats = stats;
@@ -72,4 +94,5 @@ export default class {
   static selected = selected;
   static ai = ai;
   static hit = hit;
+  static encounters = encounters;
 }

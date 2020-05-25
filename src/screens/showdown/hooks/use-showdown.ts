@@ -1,3 +1,4 @@
+import {useNavigation} from '@react-navigation/native';
 import {ShowdownSelectors, showdownSlice} from '@showdown';
 import {State} from '@store';
 import {useEffect} from 'react';
@@ -10,10 +11,12 @@ const useShowdown = () => {
   const dispatch = useDispatch();
   const {data: stats, actions: statsActions} = useStats();
   const {data: diceResults, actions: diceActions} = useDices();
+  const {navigate} = useNavigation();
+  const encounterId = ShowdownSelectors.encounterId(state);
 
   useEffect(() => {
-    dispatch(showdownSlice.actions.load('WHITE_LION_FIRST_STORY'));
-  }, [dispatch]);
+    dispatch(showdownSlice.actions.load(encounterId));
+  }, [dispatch, encounterId]);
 
   const data = {
     monsterName: ShowdownSelectors.monsterName(state),
@@ -26,6 +29,7 @@ const useShowdown = () => {
     diceResults,
   };
 
+  /* istanbul ignore next */
   const actions = {
     ...statsActions,
     ...diceActions,
@@ -45,6 +49,15 @@ const useShowdown = () => {
       dispatch(showdownSlice.actions.select({id, deck: 'hits'})),
     onShuffleHitDiscards: () =>
       dispatch(showdownSlice.actions.shuffleHitDiscards()),
+    onSelectEncounter: () => navigate('EncounterSelectScreen'),
+    onAddTokenSelected: () =>
+      dispatch(showdownSlice.actions.addTokenSelected()),
+    onRemoveTokenSelected: () =>
+      dispatch(showdownSlice.actions.removeTokenSelected()),
+    onHeal: () => dispatch(showdownSlice.actions.heal()),
+    onAiTopSelected: () => dispatch(showdownSlice.actions.aiTopSelected()),
+    onAiBottomSelected: () =>
+      dispatch(showdownSlice.actions.aiBottomSelected()),
   };
 
   return {data, actions};

@@ -1,3 +1,4 @@
+import {mockNavigate} from '@mocks';
 import {loadFeatureOptions, render} from '@test';
 import {defineFeature, DefineStepFunction, loadFeature} from 'jest-cucumber';
 import React from 'react';
@@ -12,7 +13,9 @@ defineFeature(feature, test => {
   let component: RenderAPI;
   jest.spyOn(FastImage, 'preload').mockImplementation(() => {});
 
-  beforeEach(() => {});
+  beforeEach(() => {
+    mockNavigate.mockReset();
+  });
 
   const iAmAtScreen = (step: DefineStepFunction) => {
     step('I am at "Showdown Screen"', () => {
@@ -83,7 +86,7 @@ defineFeature(feature, test => {
     });
   };
 
-  const iShouldSeeCard = (step: DefineStepFunction, expected) => {
+  const iShouldSeeCard = (step: DefineStepFunction, expected: string) => {
     step(/^I should see "(.*) (.*)"$/, (value: string, name: string) => {
       expect(
         String(component.queryByTestId(`${name}`)?.props.data[0].name),
@@ -197,6 +200,16 @@ defineFeature(feature, test => {
       expect(component.getByTestId('DiceResult.0')).toBeDefined();
       expect(component.getByTestId('DiceResult.1')).toBeDefined();
       expect(component.getByTestId('DiceResult.2')).toBeDefined();
+    });
+  });
+
+  test('Select Encounter', ({given, when, then}) => {
+    given('data is "First Story"', () => {});
+    iAmAtScreen(when);
+    iEventButton(when);
+    then('I should see "Select Encounter Screen"', () => {
+      expect(mockNavigate).toBeCalledTimes(1);
+      expect(mockNavigate).toBeCalledWith('EncounterSelectScreen');
     });
   });
 });

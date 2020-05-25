@@ -91,3 +91,9 @@ Feature: First Story
     When I press "SelectedROLL_SIX Button"
     When I press "SelectedROLL_HIT Button"
     Then I should see "Dice Result"
+
+  Scenario: Select Encounter
+    Given data is "First Story"
+    When I am at "Showdown Screen"
+    When I press "SelectEncounter Button"
+    Then I should see "Select Encounter Screen"

@@ -117,5 +117,12 @@ defineFeature(feature, test => {
     iShouldSeeText(then);
 
     iPressButton(when);
+
+    iPressButton(when);
+    iShouldSeeText(then);
+    iShouldSeeText(then);
+    iShouldSeeText(then);
+    iPressButton(when);
+    iShouldSeeText(then);
   });
 });

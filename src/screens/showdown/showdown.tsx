@@ -48,7 +48,18 @@ const ShowdownScreenComponent = () => {
         </DiceResults>
       </Top>
       <Bottom isLandscape={isLandscape}>
-        <Header title={data?.monsterName} description={data?.encounterName} />
+        <Header
+          title={data?.monsterName}
+          description={data?.encounterName}
+          right={props => (
+            <IconButton
+              {...props}
+              icon="arrow-right"
+              testID="Button.SelectEncounter"
+              onPress={actions?.onSelectEncounter}
+            />
+          )}
+        />
         <CardsContainer>
           <Cards
             testID="ActiveCards"

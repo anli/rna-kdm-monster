@@ -1,9 +1,10 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {shuffle} from '@utils';
 import R from 'ramda';
-import {ShowdownState, Stat} from './types';
+import {Card, ShowdownState, Stat} from './types';
 
 const INITIAL_STATE = {
+  encounterId: 'WHITE_LION_FIRST_STORY',
   stats: [],
   basicActives: [],
   aiDraws: [],
@@ -17,6 +18,8 @@ const INITIAL_STATE = {
   hitDiscards: [],
   hitActives: [],
 };
+
+/* istanbul ignore next */
 const showdownSlice = createSlice({
   name: 'Showdown',
   initialState: INITIAL_STATE,
@@ -93,6 +96,53 @@ const showdownSlice = createSlice({
     shuffleHitDiscards: (state: ShowdownState) => {
       state.hitDraws = shuffle([...state.hitDraws, ...state.hitDiscards]);
       state.hitDiscards = [];
+    },
+    addTokenSelected: (state: ShowdownState) => {
+      const index = R.findIndex(R.propEq('id', state.selectedCardId))(
+        state.aiActives,
+      );
+      state.aiActives = R.adjust<Card>(index, n => ({
+        ...n,
+        token: (n.token || 0) + 1,
+      }))(state.aiActives);
+    },
+    removeTokenSelected: (state: ShowdownState) => {
+      const index = R.findIndex(R.propEq('id', state.selectedCardId))(
+        state.aiActives,
+      );
+      state.aiActives = R.adjust<Card>(index, n => ({
+        ...n,
+        token: (n.token || 0) - 1,
+      }))(state.aiActives);
+    },
+    heal: (state: ShowdownState) => {
+      if (state.aiWounds.length > 0) {
+        const [card, ...remainding] = state.aiWounds;
+        state.aiWounds = remainding;
+        state.aiDraws = [...state.aiDraws, card];
+      }
+    },
+    aiTopSelected: (state: ShowdownState) => {
+      const card = R.find<Card>(R.propEq('id', state.selectedCardId))(
+        state.aiDiscards,
+      );
+      if (card) {
+        state.aiDiscards = R.reject(R.propEq('id', state.selectedCardId))(
+          state.aiDiscards,
+        );
+        state.aiDraws = [card, ...state.aiDraws];
+      }
+    },
+    aiBottomSelected: (state: ShowdownState) => {
+      const card = R.find<Card>(R.propEq('id', state.selectedCardId))(
+        state.aiDiscards,
+      );
+      if (card) {
+        state.aiDiscards = R.reject(R.propEq('id', state.selectedCardId))(
+          state.aiDiscards,
+        );
+        state.aiDraws = [...state.aiDraws, card];
+      }
     },
   },
 });
